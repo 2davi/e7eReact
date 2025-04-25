@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <script>/*
+    html태그는 div, span 둘이면 끝장난다^0^
+    과거에는 window.open을 이용해 새 창을 열어버릇했다.
+    갑자기 야동창 띄우는 악질 사이트 탓에
+    새 창을 여는 제어권을 사용자에게 줬었다.
+    그랬더니 공지같은 유용한 것들도 막을 수 있게 됐당.
+    인트라넷같은 내부 서버망에서는 강제라도 할 수 있지.
+    그 대책으로 모달을 마구 쓰기 시작했다.
+    */</script>
+    <meta charset="UTF-8">
+    <title>모달 맹글기</title>
+    
+<style>
+    #smModal{
+        /*모달창은 별도 div로 빼놓는다.*/
+        position: fixed;    /* 필수 */
+        width: 100%;
+        height: 100%;
+        left: 0; top: 0; /* 화면 전체를 막는다. */
+        background-color: rgba(0, 0, 0, 0.6);
+        display: none;      /* 필수 */
+    }
+    #smModalCont{
+        width: 60%;
+        height: 50%;
+        margin: 30px auto; /* 수평정렬 */
+        background-color: blueviolet;
+    }
+</style>
+</head>
+<body>
+    <!-- 모달은 다른 레이아웃과 큰 관계가 없당. -->
+    <div id="smModal">
+        <div id="smModalCont">
+            <button onclick="hideSm()">X</button>
+            <h1 style="color:white;">일단 내용 없엉!^0^</h1>
+        </div>
+    </div>
+    <div id="wrapper">
+        <button onclick="showSm()">모달 모달 열깅</button>
+    </div>
+<script>
+    const smModal = document.querySelector("#smModal");
+    function showSm(){
+        smModal.style.display = "block";
+    }
+    function hideSm(){
+        smModal.style.display = "none";
+    }
+</script>
+</body>
+</html>

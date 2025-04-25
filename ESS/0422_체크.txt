@@ -1,0 +1,15 @@
+자바스크립트 버전 표시 ESS ES6(late 2015)
+요즘은 ES2020 식
+ES => EcmaScript
+
+IE11 :: 최신 버전의 JavaScript 계속 문제가 되었는데,
+Edge :: 드디어 거의 지원(오히려 chrome 보다도 호환성이 높을 정도 ^Q^)
+
+ ESS 이상 새로 추가된 주요 기능
+        Template String => 백틱(``)
+        화살표함수
+        Promise => 기본 3가지 상태로 분류한 게 중요
+        모듈(Module) 소스 분리 -> 멋진 말로 ESM(Ecma Script Module)
+        async / await          -> 비동기 코드 예쁘게
+        Spread Operator(전개 연산자) ...
+        구조분해(Destructuring)   요거 모르면 React하고는 절연ㅗ^ㅃ^ㅗ

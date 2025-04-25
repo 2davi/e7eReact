@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html lang="en">
+<meta charset="utf-8">
+<!-- sort(cb)의 콜백function 자리에는 화살표 함수를 주로 쓴다. -->
+<!--
+    스타디 그룹 => 서로 아이디어 교환 => 애매한 부분에 집중!
+    소프트웨어 공학의 근간 
+          :=> 협업 => 개발론 => 규모가 커지니까 => 애자일!(품질테스트에 수단과방법을가리지마라)
+    잘못하는 사람의 질문에 답변 가능
+-->
+<script>
+
+//■숫자 배열
+const chanY = [1, 8, 9, 11, 21, 4, 2];
+//chanY.sort();   // 원본 배열에 작용함을 할 수 있다! return값이 읎성
+//chanY.sort().reverse(); //아무튼 sort()함수 자체로 쓰는 걸 권장않음
+//sort; call-back
+chanY.sort(function(a, b) {
+    //console.log("a, b: ", a,b);
+    //return a - b;   //오름차순
+    return b - a;   //내림차순
+});
+console.log("체킁: ", chanY);
+
+
+//■문자 배열
+const taeG = ["재윤", "철민", "태수", "상진", "성화"];   //문자열일 땐 산술연산에 의한 크기비교 안 됨.
+//alert(parseInt("재윤")); //숫자로 바꿀 수는 없는데...
+//alert("재윤" > "철민");  //크기 비교는 가능하다 Boolean
+taeG.sort(function(a, b) {
+    if(a > b) return 1; //양수면 다 OK!
+    else return -1; //음수면 다 OK!
+    //0이면 서로 같다는 건데, 같으면 바꿔도 무관하징 ^0^
+    //부호 바꿔주면 내림차순
+});
+console.log("체킁: ", taeG);
+
+
+//■객체 배열
+const yoonS = [
+    { name: "남혁", age: 27 },
+    { name: "규민", age: 17 },
+    { name: "성운", age: 21 },
+    { name: "경덕", age: 72 }
+];
+yoonS.sort((a, b) => {     //<+=객체끼리의 크기비교는 불가능
+    //객체({})는 크기 비교가 안됨. 기준이 있어야 함.
+    //사람을 정렬하라(X), 사람을 이름순으로 정렬하라(O);
+    if(a.name > b.name /*a.age > b.age*/) return 1;
+    else return -1;
+    //^Q^
+});
+console.log("체킁: ", yoonS);
+
+</script>
+</html>

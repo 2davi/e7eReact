@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<meta charset="UTF-8">
+<script>
+    // 함수 => 가장 많이 만들게 되는 거!,
+    // 그냥 필수라고 말하기도 머한 필수
+    // 함수는 왱 만드는강?
+    // ■  DRY 원칙 => Do not Repeat Yourself  반복하지 마랑!
+    // □ KISS 원칙 => Keep It Simple, Stupid, 심플하게 만들엉 바보얌!
+    // ◎YAGNI 원칙 => You Ain't Gonna Need It 확장성 고려한 장황코딩 금지
+    // ●SOLID 원칙 => 결국은 클린코드를 위한 원칙들들
+    // 선언과 호출을 잘 구분할 필요가 있음(callback함수에서 미친듯 정신나감)
+
+    // 공식 함수 선언법
+    // return에 타입 제약사항이 있는가? 업성^ㅂ^ 머든지 return할 수 있음
+    //->모든 함수는 자신을 호출한 쪽에 제어권을 넘겨주기 때문에, return은 항상 생략되어 있음.
+    function 수민(){
+        alert("수민 천재");
+        //return "윤석 실망이얌 아주 많이"; //<-안 써도 생략되어있음 ^0^
+        return function(pName){
+            alert(`${pName} 실망이얌`);
+            return "내가 눈에 보여야 해";
+        }
+    }
+
+    // ■ 함수를 호출하면 호출된 자리에는 return 값이 남는다.
+    // 세상에서 가장 재미난 언어!
+
+    //수민(); // 함수이름에 ()를 붙이면 호출!
+    //alert(수민()("철민"));   //수민천재 => 철민 실망이얌 => 내가 눈에 보여야 해
+
+    //return 을 잘 쓰면 if문 사용 시 else가 생략될 수 있다
+    //let yesol = "예솔";
+
+    function ckYesol(yesol){
+        if(yesol == "예솔"){
+            alert(yesol + "안농");
+            return; //return은 함수 종료의 의미를 가짐
+        }
+        alert("너 누구얌?");
+    }
+    //ckYesol("예솔");
+    //ckYesol("태수");
+
+
+</script>

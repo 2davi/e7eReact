@@ -1,0 +1,87 @@
+<!DOCTYPE html>
+<meta charset="utf-8">
+<script>
+/*
+  개인적 추천은 fetch나 axios 인데, axios가 좀 더 편함!
+  fetch는 then을 두 번을 써야 결과를 볼 수 있는 반면, axios는 한 번만 하면 됨
+  fetch는 보내는 데이터가 json형식이라면 JSON.stringify를 해줘야 하는데 axios는 안해도 됨
+  fetch는 받는 데이터에 따라 .text()/.json()를 해줘야하는데 axios는 안해도 됨
+     **axios 내부 처리 방식
+  axios는 axios 이름 자체도 B/E Controller에 맞춰 바꾸어 쓰기도 함
+
+  axios는 외부 라이브러리라서 설치해서 써야함! 만약, 폐쇄망이라면?
+*/
+</script>
+<script src="https://unpkg.com/axios/dist/axios.min.js"></script>
+<script>
+  /* axios 예쁘게 있어 보이게 쓰는 법, */
+  // 스프링의 Controller와 맵핑 시킨 이름을 쓰면 코드 가독성이 엄청나게 좋아진다.^0^
+
+
+  fetch("http://localhost:9999/api/friends", {method:"GET"})
+    .then(promise => {
+      return promise.text();
+    })
+    .then(result => {
+      let getList = JSON.parse(result);
+      let string = "";
+      getList.forEach(element => {
+        string += `${element.name}: ${element.age}<br>`;
+      });
+      document.querySelector("body").innerHTML = string;
+    })
+    .catch(() => console.error )
+    .finally(() => {
+      console.log("□■□ 비동기 요청 종료");
+    });
+
+  fetch("http://localhost:9999/api/friends/예솔친구1", {method:"GET"})
+    .then(promise => {
+      return promise.text();
+    })
+    .then(result => {
+      let getOne = JSON.parse(result);
+      let string =  "${element.name}: ${element.age}";
+      string += "<br><hr><br>"
+      document.querySelector("body").innerHTML = string;
+
+    })
+
+
+
+//■□■□■□■□■□■□■□■□■□■□■□■□■□■□■□■□■□■□■□■□■□■□■□■□■□■□■□■□■□■□■□■□■□■□■□■□■□■□■□■□■□■□■□■□■□■□
+ 
+
+
+//■□■□■□■□■□■□■□■□■□■□■□■□■□■□■□■□■□■□■□■□■□■□■□■□■□■□■□■□■□■□■□■□■□■□■□■□■□■□■□■□■□■□■□■□■□■□
+  const friendAPI = axios.create({
+    baseURL: "http://localhost:9999/api/friends"
+  });
+
+  friendAPI.get("")
+           .then(resp => console.log("■□■",resp.data));
+
+  friendAPI.post("", {name: "태수친구", age: 28})
+           .then(resp => console.log("■□■",resp.data))
+           .then(function() {
+              friendAPI.get("")
+                       .then(resp => console.log("■□■",resp.data));
+           })
+           .then(function() {
+             friendAPI.put("/태수친구", {name: "태수친구", age: 32})
+                      .then(resp => console.log("■□■",resp.data))
+                      .then(function(){
+                        friendAPI.get("")
+                      .then(resp => console.log("■□■",resp.data));
+           });//??
+  });//??
+
+  friendAPI.delete("/태수친구")
+           .then(resp => console.log("■□■",resp.data))
+           .then(function(){
+             friendAPI.get("")
+           .then(resp => console.log("■□■",resp.data));
+  });
+
+
+</script>

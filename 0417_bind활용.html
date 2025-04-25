@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<meta charset="utf-8">
+<script src="https://cdnjs.cloudflare.com/ajax/libs/sweetalert2/11.16.1/sweetalert2.min.js" integrity="sha512-LGHBR+kJ5jZSIzhhdfytPoEHzgaYuTRifq9g5l6ja6/k9NAOsAi5dQh4zQF6JIRB8cAYxTRedERUF+97/KuivQ==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/sweetalert2/11.16.1/sweetalert2.min.css" integrity="sha512-WnmDqbbAeHb7Put2nIAp7KNlnMup0FXVviOctducz1omuXB/hHK3s2vd3QLffK/CvvFUKrpioxdo+/Jo3k/xIw==" crossorigin="anonymous" referrerpolicy="no-referrer" />
+<body>
+    SweetAlert는 body에 모달창을 붙여넣기 때문에 실행 전 body태그가 있어야 함.
+</body>
+<script>
+//  document.write("<h1>아린인 나에게 웃어주지 않음</h1>");
+//  천재 상진인 document.write가 너무 길다고 판단, 짧게 쓰고 싶음
+
+/*
+function sjPrt(msg) {
+    document.write(msg);
+}
+sjPrt("<h1>나야 나 상진 천재! 푸하하하</h1>");
+*/
+//태수는 상진이를 인정하지 못해. 직접 만들어옴
+//참조를 이해한 태수가 만든 코드 (문제없음)
+//const tsPrt = document.write;
+//tsPrt("<h1>상진이 넌 나에게 안돼! 푸하하</h1>");
+/* Iligal invocation: 불법적인 호출 ^0^ */
+//write 안에 this가 사용되었나?? tsPrt("~~")로 호출하면, 이때 this는 window 객체가 된다.
+
+const tsPrt = document.write.bind(document); //this를 document에 연결
+tsPrt("<h1>ㅋㅋㅋ 나야나 태수!</h1>");
+
+//SweetAlert2 cdn 가져오기.
+//Swal.fire("학범이 멋짐 배운 호랑이");
+const suminFire = Swal.fire.bind(Swal);
+suminFire("윤석이 메롱");
+
+</script>

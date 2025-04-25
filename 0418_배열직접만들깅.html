@@ -1,0 +1,72 @@
+<!DOCTYPE html>
+<html lang="en">
+<meta charset="utf-8">
+<!-- function을 class로 2탄 -->
+<script>
+    // 자바의 ArrayList가 거의 배열과 같지용 ^ㅂ^ㅗ
+    function ArrayList(){
+        this.length = 0;    //처음 만들 때엔 아무것도 없음
+    }
+    //□add메소드
+    ArrayList.prototype.add = function(pArg) {
+        this[this.length] = pArg;
+        this.length++;
+        return this;        //<--method chaining을 가능케하는 비법 ^Q^
+    }
+    //□get메소드
+    ArrayList.prototype.get = function(pIndex) {
+        if(pIndex+1>this.length)
+            return NaN;
+        else return this[pIndex];       // 읽어오려는 요소값을 반환해야지 ㅗ^ㅂ^ㅗ
+        //return this; 특별한 케이스가 아닌 한 일반적인 경우 읽기동작은 메소드 체이닝 대상이 아님.
+    }
+    //□remove메소드
+    ArrayList.prototype.remove = function(pIndex) {
+        // 중간 index가 붕 떠버리는 경우가 생김
+        // 잠깐 쉬었다가 해결해 봅니다. 안되도 되니, 생각을 3분정도 해보는 걸로!!
+        // 로직 훈련 (기본적으로 이걸 많이 해야 자신감이 생김)
+        // 최악은 문제를 보면 생각할 시간 없이 답을 찾는 행동 (추론능력이 형성이 안됨)
+        console.log(".remove()메소드 실행.., ", pIndex,"번째 요소를 삭제합니다.");
+        delete this[pIndex];
+        this.length--;                      // 배열의 길이 조정
+        
+        for(let i=0; i<this.length; i++) {
+            if(this[i]!=null) continue;     // pIndex 앞 요소는 PASS
+            this[i] = this[i+1];            // 한 칸씩 앞으로 당겨서 메꿈
+            delete this[i+1];               // 복붙한 다음요소는 지움
+        }
+        
+        //for(let i=pIndex; i<this.length-1; i++) {
+        //    this[i] = this[i+1];
+        //}
+        //위처럼 바꾸면 if문도 필요 없고, if에 따라 다음요소를 delete할 필요도 없어짐. ^Q^
+        delete this[this.length];           // 마지막 요소를 지움.
+        return this;
+    }
+
+    const test = new ArrayList();
+    /*
+    test.add("아린").add("현식").add("상진").add("상윤").add("윤석").add("e7e");   //<--method chaining;
+    //test.add("현식");
+
+    console.log("체킁: ", test);
+    //console.log("반환체킁: ", test.get(3));
+    test.remove(1);
+    console.log("체킁킁: ", test);
+    test.remove(3);
+    console.log("체킁킁: ", test);
+    */
+
+    //완전체
+    test.add("아린")
+        .add("현식")
+        .add("상진")
+        .add("상윤")
+        .add("윤석")
+        .add("e7e")
+        .remove(1)
+        .remove(3);
+
+</script>
+
+</html>

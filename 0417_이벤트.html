@@ -1,0 +1,99 @@
+<!DOCTYPE html>
+<html lang="en">
+<meta charset="utf-8">
+<style>
+    #grand{width:200px; height:200px; border:2px solid gold;}
+    #mom{width:100px; height:100px; border:2px solid pink; position:relative; left:50px;}
+    #me{width:50px; height:50px; border:2px solid blueviolet; position:relative; left:25px;}
+    h1{font-size:1.2rem; font-style:italic;}
+</style>
+<body>
+<!-- script영역에선 ()가 호출문법인데, 왜 태그 안에서는 괄호까지 작성해야 하나?
+     태그에 bind기술을 적용해놓은 상태라서 그렇다. 서로 문법이 다른 게 아님!^0^ -->
+<!-- VSCode는 html/css/js와 electron을 써서 chromium 위에 만들어짐. -->
+<!-- 데이터 디버깅에는 console.log, 이벤트 디버깅에는 alert()가 유용하다 -->
+    <h1>inline, on이벤트, addEventListener</h1>
+    <button onclick="fck1()">학범 잠 깸!(inline)</button>
+    <button id="hbBtn">학범버튼(on이벤트)</button>
+    <button id="ysBtn">예솔버튼(EventListener)</button>
+    <br><br>
+
+    <h1>stopPropagation()</h1>
+    <div id="grand" onclick="fGrand()">할머닝
+        <div id="mom" onclick="fMom()">엄닝
+            <div id="me" onclick="fMe()">나</div>
+        </div>
+    </div>
+    <br><br>
+
+    <h1>preventDefault()</h1>
+    <a href="http://daum.net" onclick="fsy()">상윤만세</a>
+    <br><br>
+
+    <h1>target vs currentTarget</h1>
+    <button onclick="fjy()">재윤 <span style="color:blueviolet;">만만세</span></button>
+
+<script>
+    //■이벤트 등록법 3가지, inline, on이벤트, addEventListener
+    const hbBtn = document.querySelector("#hbBtn"); //<+= 주석처리해도 이벤트 실행됨.
+    const ysBtn = document.querySelector("#ysBtn"); //<+= 가장 권장하는 방법.
+
+    //□이벤트 등록법 3가지, inline, on이벤트, addEventListener
+    function fck1() {
+        alert("경덕 진지 경덕궁에 경덕!");
+        /** 대표적으로 잘못 쓰는 케이스 */
+    //  ysBtn.addEventListener("click", function() {
+    //     alert("예솔 김밥 혼자만 먹음");
+    //  });
+        ysBtn.onclick = function() {
+            alert("예솔 김밥 혼자만 먹음");
+        }
+    }
+    hbBtn.onclick = function() {                    //<+= id만으로도 찾아내긴 하나 비권장사항.
+        alert("이벤트 2번째 등록법");               //<+= 샘플코드에서만. 스크립트 후에 빼내니까.
+    }
+    hbBtn.onclick = function() {                    // 재정의 시 위에 껄 덮어버림! ()
+        alert("진지한 아린 진지 드신당");
+    }
+    ysBtn.addEventListener("click", function() {    //<+= 동료의 이벤트를 덮어쓰는 일 예방.
+        alert("예솔 김밥 다 먹음");
+    });
+    ysBtn.addEventListener("click", function() {    // 재정의가 아님. 추가추가
+        alert("예솔 김밥 혼자만 먹음");
+    });
+
+
+    //■이벤트 버블링! :=> event.stopPropagation(); 이벤트 캡쳐링!!
+    //□나의 사생활이 없음.. 나에게 일어난 일을 엄마 할머니가 다 알아t-w-t 화가 나!
+    function fGrand() {
+        alert("나야나 할멈이얌");
+    }
+    function fMom() {
+        alert("나다 성화야 엄마야");
+    }
+    function fMe() {
+        event.stopPropagation();    //<+= 이벤트 전파를 막는다! 사생활 지키미^ㅂ^
+        //event.preventDefault();   
+        alert("나야나 성화");
+    }
+
+
+    //■ event.preventDefault(); built-in EVENT를 막아버림.
+    function fsy() {
+        event.preventDefault(); //클릭시 href값으로 이동하는 이벤트를 막아버림.
+        alert("눌렀닝, 이동전이양");
+        //고참 짜증나게 여기서 속여서 ddit.or.kr로 이동시킨다.
+        location.href = "http://ddit.or.kr";
+    }
+
+
+    //■event.target vs event.currentTarget;
+    function fjy() {
+    //  console.log("체킁: ", event.target);    //<+=event.target; 이벤트 발생시킨 녀석 지칭
+        //button 안에 span태그를 넣었지만 순전히 꾸미기 위한 거였지, 다른 의미는 없었음!
+        //span안팎을 클릭해서 button만 가리키게 하려면..
+        console.log("체킁: ", event.currentTarget); //<+= 이건 안 바뀜!
+    }
+</script>
+</body>
+</html>

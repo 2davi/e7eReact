@@ -1,0 +1,67 @@
+<!DOCTYPE html>
+<html lang="en">
+<meta charset="utf-8">
+<script>
+// ... Spread Operator (전개 연산자) 프론트 프레임워크에서 미친 듯이 사용됨
+
+let testArr = [1,2,3,4];
+
+testArr.push(5);
+//결국 배열 복사가 이루어짐
+let test2 = [...testArr, 5];  // [] => new Array(), 새 배열이란 사실이 중요! 낭비적인 느낌.
+
+
+console.log("확인: ", test2);
+let hjInfo = {
+  name: "상윤",
+  age: 20
+}
+
+//결국 객체 복사가 이루어짐
+let hj2Info = {...hjInfo, nickName:"메롱"};
+console.log("체킁: ", hj2Info);
+
+let hj3Info = {...hjInfo, name:"성운"};
+console.log("체킁킁: ", hj3Info);
+
+//원시타입만 복사고, 객체타입은 다 참조형이라고 배웠는디,
+// 전개연산자 덕분에 객체타입도 쌉가능해져부렸다 ^0^~
+
+let merong = {
+  name: "태규"
+}
+let merong2 = merong;
+let merong3 = {...merong};
+merong2.age = 20;
+merong3.age = 20;
+alert( merong == merong2 ); //true
+alert( merong == merong3 ); //false
+
+let tiger = [1, 2, 3, 4, 5];
+console.log("체크응: ", tiger);
+//> ???? This value was evaluated upon first expanding... It may changed since then.
+//> 브라우저가 이 뒤에 바뀐 값을 찍어줌. 디버깅이 힘들엉
+//> 디버깅을 할 때 복사를 해주어야 함.
+let tiger2 = [...tiger];
+tiger2[2] = 4;
+console.log("체쿠웅: ", tiger2);
+
+alert("272" ==  272); // loose(대충 값만) 비교 (형변환 발생!)
+alert("272" === 272); // strict(엄격) 비교 (형변환 발생X)
+                      // 엄격한 비교를 권장!
+
+// 언제 이렇게 쓰낭? 필수는 매개변수명을 주고, 선택사항(옵션)은 나머지로 처리
+function fCk(hs, kd, ...pArr) { // 요렇게 쓸 땐 전개 연산자라고 부르지 않음,??
+  alert(pArr);  //현정, 성운
+}
+fCk("현식", "경덕", "현정", "성운");
+
+// 매개변수 값 초기화
+function fCk2(pName="상진", pInsa="술꾼") { //매개변수 안 주면 초기값사용, 매개변수 주면 준 값 사용
+  alert(`${pName} ${pInsa}`);
+}
+fCk2();
+fCk2("철민", "민첩");
+fCk2("철민"); // 하나만 줘도 빈자리 매개변수는 초기값으로 대체해줌.
+</script>
+</html>

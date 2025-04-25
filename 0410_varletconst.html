@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+<meta charset="utf-8">
+<script>
+"use strict"
+
+/*  var만 되는데, let과 const는 나중에 추가되어서 동작이 별도로 이루어짐! */
+/*  window => 브라우저 탭 1개, document => html문서, location => 주소표시줄
+                                                                          */
+//var merong = "메롱";    // 전역변수 선언
+// 전역변수를 var로 선언하는 것은 브라우저 최상위 객체 window에 속성을 추가하는 것과 같음
+//alert(window.merong);   // 
+window.myname = "태수김";   // 전역변수 선언!
+alert(myname);
+
+function fmerong(){
+    alert("안드로메다 성운");
+};
+window.fmerong();   // 전역함수의 선언은 window객체의 메소드 선언과 결과가 같음.
+//javascript는 객체지향언어,, 끊임없이 객체의 속성과 직응
+
+/*  const 사용에 오해가 가장 많음.. 오해하고 있으면 면접 바로 탈락! */
+/*                                                                  */
+const hj = "현정";
+//hj = "이현정";  //?? 당근 안됨!
+
+const hjInfo = {    // {} ==? new Object();
+    name: "현정",
+    age: 23
+};
+hjInfo.name = "현정리"; // 여기에 오해가 가장 많음! 내용물은 바꿀 수 있음
+console.log("체킁: ", hjInfo);  // 항상 눈으로 확인하는 습관!
+//hjInfo = { name: "철민" };  // {} => new Object(), 박스 자체를 바꾸려는 시도(X)
+
+const arin = ["차은우", "찬영"];
+arin.push("남자아이돌");    // ??
+console.log("체킁: ", arin);
+//arin = [];  // 요거는 박스를 바꾸려고 해서 안됨!
+
+
+
+// 엄격모드 적용, 앞으로는 디폴트 값이 될 건데, 이전 버전과의 호환성이 문제
+// var let const 알고 씁시당!
+/*  var가 다른 언어의 변수 scope(범위)와 달라서
+    let과 const를 나중에 따로 만들어줌
+*/
+var myName = "찬영"; // ok? => ng로 만들려면?
+
+// let과 var 비교7
+function fCK() {
+
+    {       // 그냥 코드 블락
+        let chan = "찬영";      //+> 밖으로 뻗어서 처음 만나는 {} 안에서만 살아있음
+        var young = "영찬";     //+> 밖으로 뻗어서 function키워드가 있다면 그 안에서만 살아있음
+    }
+
+    alert(young);   //? 떴엉
+    //alert(chan);    //? 안떴엉
+};
+alert(young);
+
+
+fCK();  //함수 호출
+</script>

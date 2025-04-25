@@ -1,0 +1,21 @@
+<!DOCTYPE html>
+<html lang="en">
+<meta charset="utf-8">
+<script>
+const gesiTable = "gesi";
+const gesis = [];
+
+for(let i=0; i<108; i++) {
+  let gesi = {
+    gId: (i+1),
+    gWriter: `지은이 ${i+1}`,
+    gTitle: `제목 ${i+1}`,
+    gContent: `아무 내용 ${i+1}`
+  }
+  gesis.push(gesi);
+}
+localStorage.gesiTable = JSON.stringify(gesis);
+
+
+</script>
+</html>

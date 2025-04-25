@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+  <meta charset="utf-8">
+  <title>경덕 만만세</title>
+  <script src="https://unpkg.com/axios/dist/axios.min.js"></script>
+</head>
+<body>
+  <!-- post는 택배나 소포에 비유할 수 있다. 파일을 보내려면 POST 방식이어야 함!! -->
+  <form action="" method="post" enctype="multipart/form-data">  </form>
+  <div id="disp"></div>
+  <!-- ajax로 파일 보낼 땐 form태그는 없어도 됨 -->
+  <input type="file" id="kdFile" value="" multiple><br>
+  <button onclick="kdSend()">뗜송</button>
+<script>
+  const disp = window.disp;
+  const kdFile = window.kdFile;
+  const uploadAPI = axios.create({
+    baseURL: "http://localhost:9999/api/ysfile"
+  });
+  
+  function kdSend() {
+    // ajax로 파일을 보내려면 무조건 FormData가 필요
+    // 실질적인 데이터 모양은 binary, 포맷
+    //JAVA에서는 MultipartFile이라는 클래스로 받을 수 있다.
+    let formData = new FormData();
+    // formData에 담는 정보가 FriendVO에 맞게 보내야 함!, 속성이름만 맞추어주면 쉬움!!
+    // Spring의 매개변수 이름과 FormData의 KEY값 이름으로 바인딩.
+    for(let i=0; i<kdFile.files.length; i++) {
+      formData.append("sajinFile", kdFile.files[i]);
+      console.log("프로퍼티체킁: ", kdFile.files[i]);
+    }
+    formData.append("name", "경덕아님");
+    formData.append("age", 100);
+    uploadAPI.post("", formData)
+    .then(resp=> {
+      console.log("체킁: ",resp.data);
+      let imgArr = resp.data;
+      for(let j=0; j<imgArr.length; j++){
+        let syImg = document.createElement("img");
+        syImg.src = `http://localhost:9999${imgArr[j]}`;
+        syImg.width=100; syImg.height=100;
+        disp.appendChild(syImg);
+      }
+    });
+  }
+</script>
+</body>
+</html>

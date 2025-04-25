@@ -1,0 +1,212 @@
+[
+  {
+    "name": "경미닝",
+    "birth": "2000-03-03",
+    "nationality": "한국",
+    "special": "기획",
+    "isMZ": true
+  },
+  {
+    "name": "선주닝",
+    "birth": "1999-09-09",
+    "nationality": "한국",
+    "special": "비동기",
+    "isMZ": true
+  },
+  {
+    "name": "카리나",
+    "birth": "2000-04-11",
+    "nationality": "한국",
+    "special": "리액트",
+    "isMZ": true
+  },
+  {
+    "name": "지젤",
+    "birth": "2000-10-30",
+    "nationality": "일본",
+    "special": "JSP",
+    "isMZ": true
+  },
+  {
+    "name": "윈터",
+    "birth": "2001-01-01",
+    "nationality": "한국",
+    "special": "바닐라JS",
+    "isMZ": true
+  },
+  {
+    "name": "닝닝",
+    "birth": "2002-10-23",
+    "nationality": "중국",
+    "special": "마이바티스",
+    "isMZ": true
+  },
+  {
+    "name": "누구닝",
+    "birth": "1976-07-06",
+    "nationality": "러시아",
+    "special": "파이터",
+    "isMZ": false
+  },
+  {
+    "name": "람보닝",
+    "birth": "1982-08-02",
+    "nationality": "미국",
+    "special": "사격",
+    "isMZ": false
+  },
+  {
+    "name": "슈퍼맨",
+    "birth": "1978-07-08",
+    "nationality": "호주",
+    "special": "망토펴기",
+    "isMZ": false
+  },
+  {
+    "name": "머하닝",
+    "birth": "1988-08-08",
+    "nationality": "중국",
+    "special": "어리둥절",
+    "isMZ": false
+  },
+  {
+    "name": "추우닝",
+    "birth": "1999-09-09",
+    "nationality": "한국",
+    "special": "댄스폭격",
+    "isMZ": true
+  },
+  {
+    "name": "그러닝",
+    "birth": "2000-01-01",
+    "nationality": "한국",
+    "special": "오호공감",
+    "isMZ": true
+  },
+  {
+    "name": "아프닝",
+    "birth": "2002-09-03",
+    "nationality": "중동",
+    "special": "꽤병",
+    "isMZ": true
+  },
+  {
+    "name": "들었닝",
+    "birth": "2004-04-04",
+    "nationality": "대만",
+    "special": "엿듣기",
+    "isMZ": true
+  },
+  {
+    "name": "달리닝",
+    "birth": "1989-02-11",
+    "nationality": "몽골",
+    "special": "스피드",
+    "isMZ": false
+  },
+  {
+    "name": "언제닝",
+    "birth": "1977-07-07",
+    "nationality": "필리핀",
+    "special": "역사",
+    "isMZ": false
+  },
+  {
+    "name": "믿겠닝",
+    "birth": "2010-10-10",
+    "nationality": "한국",
+    "special": "거짓말",
+    "isMZ": true
+  },
+  {
+    "name": "오해닝",
+    "birth": "2011-11-21",
+    "nationality": "한국",
+    "special": "착각",
+    "isMZ": true
+  },
+  {
+    "name": "버리닝",
+    "birth": "1991-01-09",
+    "nationality": "일본",
+    "special": "분리수거",
+    "isMZ": true
+  },
+  {
+    "name": "다우닝",
+    "birth": "2005-05-09",
+    "nationality": "한국",
+    "special": "향기롭깅",
+    "isMZ": true
+  },
+  {
+    "name": "두리번",
+    "birth": "2004-05-07",
+    "nationality": "한국",
+    "special": "경계하기",
+    "isMZ": true
+  },
+  {
+    "name": "느꼈닝",
+    "birth": "2017-10-17",
+    "nationality": "베트남",
+    "special": "눈치보기",
+    "isMZ": true
+  },
+  {
+    "name": "얼마닝",
+    "birth": "2002-09-08",
+    "nationality": "중국",
+    "special": "흥정",
+    "isMZ": true
+  },
+  {
+    "name": "취했닝",
+    "birth": "1972-08-10",
+    "nationality": "과테말라",
+    "special": "과태료",
+    "isMZ": false
+  },
+  {
+    "name": "가스닝",
+    "birth": "1993-08-03",
+    "nationality": "러시아",
+    "special": "가스제거",
+    "isMZ": true
+  },
+  {
+    "name": "바라닝",
+    "birth": "1899-04-05",
+    "nationality": "한국",
+    "special": "기대하기",
+    "isMZ": false
+  },
+  {
+    "name": "조으닝",
+    "birth": "2004-04-01",
+    "nationality": "한국",
+    "special": "마구긍정",
+    "isMZ": true
+  },
+  {
+    "name": "시르닝",
+    "birth": "1961-02-02",
+    "nationality": "한국",
+    "special": "고집펴기",
+    "isMZ": false
+  },
+  {
+    "name": "어디닝",
+    "birth": "2001-03-09",
+    "nationality": "홍콩",
+    "special": "오리무중",
+    "isMZ": true
+  },
+  {
+    "name": "끄치닝",
+    "birth": "2004-08-08",
+    "nationality": "슬로바키아",
+    "special": "은폐엄폐",
+    "isMZ": true
+  }
+]

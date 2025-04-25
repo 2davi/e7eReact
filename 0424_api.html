@@ -1,0 +1,23 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+  <meta charset="utf-8">
+  <title>더미이미지</title>
+</head>
+<body>
+  <img src="https://api.dicebear.com/9.x/miniavs/svg?seed=Jameson&scale=100&size=6000" alt="avatar" />
+  <img src="https://dummyimage.com/600x400/000/fff.png&text=%5EQ%5E" alt="" />
+  <img src="https://dummyimage.com/600x400/000/fff.png&text=%5EQ%5E" alt="" />
+  <img src="https://dummyimage.com/600x400/000/fff.png&text=%5EQ%5E" alt="" />
+<script>
+  let ysInsa = "예솔 안농";
+  let enCoded = encodeURIComponent(ysInsa); //<-인코딩
+  alert(enCoded);
+  let deCoded = decodeURIComponent(enCoded);
+  alert(deCoded);
+  //인코딩 / 디코딩  =>  실제 보안에는 도움 안 됨
+  // escape    encodeURI   encodeURIComponent
+  // unescape  decodeURI   decodeURIComponent
+</script>
+</body>
+</html>

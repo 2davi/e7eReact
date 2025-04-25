@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="utf-8">
+<title>Animation</title>
+<style>
+  /*
+    애니메이션을 쉽게 구현할 수 있게 나옴 
+    최종 프로젝트때 쪼끔씩 시선 끄는 데 써보면 좋음!
+  */
+  @keyframes taesu {
+      0% {transform: rotate(0deg);}
+     20% {transform: rotate(-30deg);}
+     50% {transform: rotate(0deg) scale(1.5);}
+     80% {transform: rotate(30deg);}
+    100% {transform: rotate(30deg);}
+  }
+  #notalcol:hover {
+    animation: taesu 2s ease-in-out 0s infinite alternate;
+    /* name duration timing-function delay iteration-count direction fill-mode; */
+  }
+  #notalcol {
+    margin-top: 50px;
+    margin-left: 50px;
+    width: 200px;
+    height: 200px;
+    background-image: url("https://cdn.spotvnews.co.kr/news/photo/202502/732037_1162773_5416.jpg");
+    background-size: contain;
+    background-position: center center;
+    border-radius: 50%;
+
+  }
+</style>
+</head>
+<body>
+<div id="container"> 
+  <div id="notalcol"></div>
+</div>
+</body>
+</html>

@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<meta charset="UTF-8">
+<script>
+    //-> 반복문; 보통 for나 while문 1개만 주로 씀!
+    //■ 무한 루프 ::항상 빠져나가는 조건을 먼저 생각한다..
+    // 그냥 좋아하는 걸로 하나!!
+/*
+    let cnt = 1;
+    while("예솔이 예뻐"){
+        cnt++;
+        if(cnt==10) break;
+    }
+
+    for(let cnt=1;"현정이멋져";cnt++){    //<-아무것도 안 쓰면 그대로 무한루프
+        if(cnt==10) break;
+    }
+*/
+
+/* 찔끔 쓰임, 난 남과 다르당. 이걸 쓰면 스스로 관종인가 의심해보아야 함
+let chArr = ["상진", "태수", "철민", "재윤"];
+for(let fbi of cyArr){
+    alert(fbi);
+}
+*/
+
+let ysInfo = {
+    name:"윤석",
+    age: 100,
+    level: "good"
+}
+/*
+for(let attr in ysInfo){
+    alert("속성명: " + attr + " => " + ysInfo[attr]);
+}
+*/
+// 그리 많이 쓰이지는 않으나, 유용할 때가 있음!
+for(let attr in document){
+    console.log("속성명: ", attr, " => ", document[attr]);
+}
+
+// 여기서 뜬금 없이 조건문
+let isSumin = false;
+
+ //isSumin && alert("수민 메롱"); // 앞이 false라면 'AND'조건에 닿을 수 없어서 실행 안 됨
+ isSumin || alert("수민 메롱"); // 앞이 true니까 뒤에 걸 할 필요가 없음
+                                // 앞이 false면 뒤에 걸 실행한대 ^0^
+ // 위 한 줄이 뜻하는 바..
+ if(!isSumin){
+    alert("수민 메롱");
+ }
+ // ^0^
+ 
+</script>

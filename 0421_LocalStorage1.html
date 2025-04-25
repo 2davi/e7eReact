@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html lang="en">
+<meta charset="utf-8">
+<script>
+// 브라우저에도 저장 공간이 있음
+// 일반적으로 익숙한 녀석은 cookie!
+// 쿠키 대용으로 LocalStorage를 많이 사용하는 추세.
+/* F12 -> [TAB}Application -> LocalStorage/SessionStorage/IndexedDB */
+
+// 쓰깅
+localStorage.setItem("KEY", "VALUE");
+localStorage.setItem("이름", "경덕");
+localStorage.setItem("이름", "예솔앙"); // 덮어쓰기 _동일한 KEY값
+localStorage.이름2 = "수민양"; // 객체에 속성&값 부여하는 본래 JS 문법
+/* Setter/Getter에 익숙한 다른 언어 사용자들을 위한 배려 .setItem... */
+
+// 읽기
+alert(localStorage.getItem("이름"));
+alert(localStorage.getItem("^0^")); //없으면 null;
+alert(localStorage.key(0)); //index로 호출
+/* KEY값 읽어야 할 때, 순서가 보장되지 않아서 1개씩 읽는 건 잘 쓰지 않음 */
+
+
+// 지우기
+localStorage.removeItem("이름");
+localStorage.clear();
+
+/*
+	WEB App	-> 사용자가 신경 쓸 필요가 없음.
+  Native App(설치형) -> version upgrade 때마다 사용자가 새로 다운받고 재설치해야함.
+	Hybrid => 껍데기는 Native인데 실질적인 구동은 Web...
+	**스마트 팩토리 _공정 _자동화
+*/
+</script>
+</html>

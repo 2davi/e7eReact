@@ -1,0 +1,75 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<title>아린 힘내랑랑</title>
+</head>
+<body>
+    <button onclick="fDataChg()">괘니 데이터 넣어보깅</button>
+    <!-- 차트 크기는 부모Div 크기로 제어해야 함 -->
+    <div style="width:600px;">
+        <canvas id="myChart"></canvas>
+      </div>
+      
+      <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+      
+      <script>
+        //■Chart.js 이것저것 건드리기
+        function randomData() {
+            const ranArr = [];
+            for(let i=0; i<8; i++){
+                ranArr.push(Math.round(Math.random()*40 +20));
+            }
+            return ranArr;
+        }
+        function fDataChg() {
+            //데이터 수는 labels의 개수를 따라간다. label수를 잘 맞추어 주어야 함
+            gmChart.data.labels = ["흥", "치", "뿡", "뿡", "왜", "머", "킁", "컥"];
+            
+            gmChart.data.datasets[0].data = randomData();
+
+            const anoData = {
+                type: 'line',   // 차트 믹스는 오직 line과 bar만 가능!
+                label: '경석 여친 수 변화',
+                data: randomData(),
+                borderWidth: 1,
+                borderColor: "#ccc"
+            }
+            if(gmChart.data.datasets[1]==null)
+                gmChart.data.datasets[1] = anoData;
+            else gmChart.data.datasets[1].data = randomData();
+            gmChart.update();   //바뀐 데이터값대로 다시 렌더링. re-rendering 요거 하나는 꼭 기억!
+            setTimeout(fDataChg, 500);
+        }
+        
+        //■Chart.js
+        const ctx = document.querySelector('#myChart');
+      
+        //'생성자의 리턴을 변수로 받으면(gmChart),
+        // 설정부분을 거의 바로 읽고 제어할 수 있음'
+        const gmChart = new Chart(ctx, {
+            type: 'bar',  //bar, line, pie, doughnut, radar
+            //bar크기, line추이, pie/doughnut점유율, radar특성
+            data: {
+                labels: ['Red', 'Blue', 'Yellow', 'Green', 'Purple', 'Orange'],
+                datasets: [{
+                    label: '# of Votes',
+                    data: [12, 19, 3, 5, 2, 3],
+                    borderWidth: 1
+                }]
+            },
+            options: {
+              //indexAxis: 'y', 요것만 추가하면 x-y축 change
+                scales: {
+                    y: {
+                        beginAtZero: true
+                    }
+                }
+            }
+        });
+
+        console.log("체킁: ", gmChart.data.datasets[0].data[3]);//=5
+        //이렇게 눈으로 따라갈 수 있으면, 구조파악이 잘 된 거다.
+        </script>
+</body>
+</html>

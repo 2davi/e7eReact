@@ -1,0 +1,163 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <title>Document</title>
+  <style>
+    .activePage{margin: 5px;font-weight: bold;color: darkred;font-size: 3em;}
+    #merong{height: 300px;}
+    #wrapper{display:flex;flex-direction: column;margin-top: 50px;gap:10px;}
+    #wrapper *{margin: 0px auto;}
+    #pagenation{text-align: center;}
+    input,button{display: block;}
+    tr *{vertical-align: middle;}
+  </style>
+</head>
+<body>
+<div id="wrapper">
+  <h1>나 철민이얌! 누가 물어봤냐공?</h1>
+  <div><button onclick="remvSelected()">선택된 것만 삭제하깅^ㅂ^</button></div>
+  <div id="cmList"></div>
+</div>
+<script>
+  const cmList = document.querySelector("#cmList");
+  const gesiTable = "gesi";
+
+  let gesis = JSON.parse(localStorage.getItem("gesiTable"));
+  let tblStr = `<div id="merong">
+    <table border=1 width=800>
+      <thead>
+        <tr>
+          <th width=120px>ID</th>
+          <th width=300px>TITLE</th>
+          <th width=300px>WRITER</th>
+          <th width=100px>DELETE^0^</th>
+          <th width=40px><input type=checkbox id=lolCheckbox></th>
+        </tr>
+      </thead>
+      <tbody>`;
+
+  /* 페이지 나누기 산수 한 번 해보는 걸로, 구현 코드는 다를 수 있지만, 근본은 다 산 */
+  const cntPerPage = 10;        // 페이지 당 10개씩
+  let totalCnt = gesis.length;  // 전체 글 갯수
+  let totalPageCnt = Math.ceil(totalCnt/cntPerPage);
+    let currentPage = 1;          // 디폴트 1, 주소표시줄에 page란 값이 같이 넘어 왔는지 체크
+    if((qStr = location.href.indexOf("?")) != -1) {
+      currentPage = location.href.split("?")[1].split("=")[1];
+    }
+  let startNum = (currentPage - 1) * cntPerPage;  // 시작 넘버
+    let endNum = startNum + cntPerPage;
+    if(endNum > totalCnt) endNum = totalCnt; //totalCnt보다 큰 건 말이 안 됨.
+
+  function getList() {
+    for(let i=startNum; i<endNum; i++) {
+      let gesi = gesis[i];
+      if(gesi!=null) {
+        tblStr += `
+        <tr>
+          <td>${gesi.gId}</td>
+          <td>${gesi.gTitle}</td>
+          <td>${gesi.gWriter}</td>
+          <td style="text-align:center; vertical-items:middle;">
+            <button style="text-align:center; border-radius:10%; border:none; background-color:#ddd;"
+              onclick="fRemv(${gesi.gId})">
+              지울껑
+            </button></td>
+          <td style="text-align:center;">
+            <input type=checkbox>
+          </td>
+        </tr>`;
+      }
+    }
+    tblStr += `</tbody></table></div><br><br><div id="pagenation">`;
+    
+    // 페이지 표시
+    for(let i=1; i<=totalPageCnt; i++) {
+      if(i == currentPage){
+        tblStr += `<a class="activePage" href="/0421_LocalStorage활용.html?page=${i}">${i}</a>`;
+      } else {
+        tblStr += `<a style="margin:15px;color:#666;font-size:1.5em;" href="/0421_LocalStorage활용.html?page=${i}">${i}</a>`;
+      }
+    }
+    tblStr += `</div>`;
+    cmList.innerHTML = tblStr;
+  }
+  getList();
+
+/* ■□■□■□■□■□■□■□■□■□■□■□■□■□■□■□■□■□■□■□■□■□■□■□■□■□■□■□■□■□■□■□■□■□■□■□■□■□■□■□■□■□■□■□■□■□■□■□■□■□■□■□■□■□■□■□■□■□■□■□■□■□■□■□■□■□■□ */
+
+  //■□■개별삭제버튼
+  function fRemv(gId) {
+    for(let i=0; i<gesis.length; i++) {
+      let gesi = gesis[i];
+      if(gesi.gId == gId) {
+        /* 자기자신을 변경하는 메소드:: 파괴적 메소드 e.g., splice(); */
+        gesis.splice(i, 1); //해당 i로부터 1개 지우깅!
+        break;
+      }
+    }
+    localStorage.gesiTable = JSON.stringify(gesis);
+    if(gesis.length%10 == 0)
+      location.href = `/0421_LocalStorage활용.html?page=${currentPage-1}`;
+    else
+      location.href = location.href; //주소표시줄 url을 복사해서 enter치는 효과 == 새로고침
+  }
+
+  //■□■전체선택
+  const lolChk = document.querySelector("#lolCheckbox");
+  lolChk.addEventListener("change", function(){
+    let allChk = document.querySelectorAll("tbody tr td input[type='checkbox']");
+    
+    /* this 대용; event.target, event.currentTarget */
+    console.log(event.currentTarget);
+    
+    //console.log(lolChk.checked);
+    if(lolChk.checked==true){
+      for(let i=0; i<allChk.length; i++) {
+        allChk[i].checked = true;
+      }
+    } else {
+      for(let i=0; i<allChk.length; i++) {
+        allChk[i].checked = false;
+      }
+    }
+    /*
+    if(lolChk.checked){
+      allChk.forEach(ckbox => {
+        ckbox.checked = true;
+      });
+    } else {
+      allChk.forEach(ckbox => {
+        ckbox.checked = false;
+      ])l
+    }
+    */
+  });
+
+  //■□■전체삭제버튼
+  function remvSelected() {
+    let allChk = document.querySelectorAll("tbody tr td input[type='checkbox']:checked  ");
+    //console.log(allChk);
+    
+    for(let i=0; i<allChk.length; i++) {
+      let gIdSelected = parseInt(allChk[i].parentElement.parentElement.children[0].textContent);
+      
+      for(let j=0; j<gesis.length; j++) {
+        if(gesis[j].gId == gIdSelected){
+          gesis.splice(j, 1);
+          break;
+        }
+      }
+      //console.log(gIdSelected);
+    }
+
+    localStorage.gesiTable = JSON.stringify(gesis);
+
+    if(gesis.length%10 == 0)
+      location.href = `/0421_LocalStorage활용.html?page=${currentPage-1}`;
+    else
+      location.href = location.href; //주소표시줄 url을 복사해서 enter치는 효과 == 새로고침
+  }
+</script>
+</body>
+</html>

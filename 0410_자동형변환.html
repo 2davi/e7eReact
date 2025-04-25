@@ -1,0 +1,25 @@
+<!DOCTYPE html>
+<meta charset="utf-8">
+<script>
+    /*
+        +, -, *, /, %  산술연산
+        이중에 +만 별도로 문자열 더하기 기능 > 숫자더하기보다 우선함.
+        -, *, /, % 는 문자열 연산 자체가 없음, 자동으로 다 숫자로 자동 형변환
+    */
+    //alert("272"+272);   // ->"272272"
+    //alert("272"-"272"); // ->0
+
+    //let ain = "272";
+    //alert(typeof(ain)); // ->stirng
+    let ain = "272"-0; //"272"*1;   parseInt 쓰지 않고도, 자동형변환으로 가능
+    alert(typeof(ain)); // ->number
+
+    // 문자열은 다 true인가?, ""만 뺴고 모두 true; 정확히 truthy
+    // 숫자는 0빼고는 다 true;
+    let isCheck = !0;   //= true와 같음. 숫자0이 느낌표에 의해 강제 형변환
+    //모든 객체는 그냥 true. 
+    // null, undefined는 false로 처리됨!
+    if(null){   //개발자 노래 null 사랑해, Null Pointer Exceptioin 
+        alert("그렇다.");
+    }
+</script>

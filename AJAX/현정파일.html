@@ -1,0 +1,101 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+  <meta charset="utf-8">
+  <title>inputTypeFile</title>
+  <script src="https://unpkg.com/axios/dist/axios.min.js"></script>
+</head>
+<body>
+  <div id="preview"></div>
+  <input type="file" id="hjFile" value=""
+         accept=".jpg, .png, .gif" multiple dir onchange="fChgFile()">
+  <button id="fUpload">떤쫑</button>
+  <!-- input의 속성... accept:확장자 dir:디렉토리선택(인트라넷, 거의안씀) multiple:여러개 -->
+<script>
+  const preview = document.querySelector("#preview");
+  const hjFile = document.querySelector("#hjFile");
+  const fileUpload = window.fUpload;
+  const uploadAPI = axios.create({
+    baseURL: "http://localhost:9999/api/ys/file/list"
+  });
+  function fChgFile() {
+    preview.innerHTML = "";
+
+
+/*
+    //핵심 속성은 files
+    let file0 = hjFile.files[0];
+    console.log(hjFile.files); //value를 보내면 파일명만 가고, files를 보내야 파일자체!
+    console.log(file0);
+
+    //사람은 컴퓨터 실제 파일을 읽기가 너무 어려움!
+    var fileReader = new FileReader();  //파일 읽어주는 아저씨(고마웡)
+    fileReader.readAsDataURL(file0);    //비동기
+    fileReader.onload = function() {      //다 읽었당 이벤트
+      console.log("체킁: ", fileReader.result); //<-- 읽은 결과는 result속성에
+      var hjImg = document.createElement("img");
+      hjImg.src = fileReader.result;
+      hjImg.width="200";
+      hjImg.setAttribute("height", "200");
+      hjImg.style="";
+      window.preview.appendChild(hjImg);
+    };
+*/
+    // 테스트, 파일 여러개 선택했을 때, 선택한 것 모두
+    // preview 나오게 하기.
+    // 반복문 안에 비동기 코드가 있다면, 각각을 하나의 function으로 빼주는 것이 좋은 코드
+    // var로 하면 function scope라서 제대로 안 됨(이유는 비동기코드가 안에 있어서)
+    // let으로 하면 되긴 되지만, 흐름상 가독성을 해치고, 결과만 나오는 좋지 않은 코드
+    let fileList = [];
+    for(let i=0; i<hjFile.files.length; i++) {
+      
+      }
+    
+
+    //함수로 scope분리, 개별 파일 1개만 비동기 처리하는 함수
+    //var로 하든 let으로 하든 잘됨을 알 수 있음!
+    //반복문 안에 비동기 코드가 들어올 땐 잠시 stop 생각!
+    //당신을 고급 개발자 이상으로 만들어 줄 것임!!
+    function readOne(ysFile, idx) {
+      let fr = new FileReader();
+      fr.readAsDataURL(ysFile, idx);
+      fr.onload = function() {
+        console.log("멀티플 체킁: ", fr.result);
+        var hjImg = document.createElement("img");
+        hjImg.src = fr.result;
+        hjImg.width="200";
+        hjImg.setAttribute("height", "200");
+        hjImg.setAttribute("data-idx", idx);
+        window.preview.appendChild(hjImg);
+
+        hjImg.addEventListener("click", function(event){
+          hjImg.remove();
+        });
+      }
+    }
+
+    for(let i=0; i<hjFile.files.length; i++) {
+      readOne(hjFile.files[i], i);
+    }
+  }
+  
+  fileUpload.addEventListener("click", function() {
+    let fileList = new FormData();
+    console.log(fileList, this)
+    for(let i=0; i<hjFile.files.length; i++){
+      let formData = new FormData();
+      formData.append("sajinFile", hjFile.files[i]);
+      formData.append("name", "경덕아님");
+      formData.append("age", 100);
+      console.log(formData)
+      fileList.append(`${i}`, formData);
+      console.log("※ ", fileList)
+    }
+    let listString = JSON.stringify(fileList);
+    console.log(listString);
+    uploadAPI.post("", listString);
+  });
+  
+</script>
+</body>
+</html>

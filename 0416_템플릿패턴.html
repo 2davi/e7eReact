@@ -1,0 +1,72 @@
+<!DOCTYPE html>
+<meta charset="UTF-8">
+<style>
+    #temp{
+        border: 1px solid pink;
+        display: none;
+    }
+</style>
+<body>
+    <!-- 잘 쓰면 아주 유용함! .cloneNode() -->
+    <button onclick="fshow()">친구등록(+)</button>
+    <button onclick="fjson()">JSON 시리얼라이즈</button>
+    <div id="temp">
+        <form action="">
+        이름: <input type="text" name="fname" value="" placeholder="이름 입력"><br>
+        나이: <input type="number" name="fage" value="" placeholder="나이 입력"><br>
+        <button onclick="fadd(this)">등록</button>
+        <button onclick="fcancel(this)">취소</button>
+        </form>
+    </div>
+    <!-- 실제 보여줄 화면 -->
+    <div id="flist">
+
+    </div>
+</body>
+<script>
+////정말 큰 자바스크립트 프로젝트에선 전역변수도 객체에 담음
+////리스트 뽑기 쉽게 하기 위해서
+const global = {};
+global.temp = document.querySelector("#temp");
+global.flist= document.querySelector("#flist");
+
+//전역변수
+const temp  = document.querySelector("#temp");
+const flist = document.querySelector("#flist");
+
+//전역함수
+// :
+//이벤트함수
+// :
+
+//현정이가 저를 깜!!
+function fjson() {
+    let hbFrds = [];    //빈 배열
+    //DOCUMENT 내 모든 form을 가지고 있음 => document.forms
+    for(let i=1; i<document.forms.length; i++) {    //<-1부터 돌리는 이유, 견본템플릿이 최상위에 위치함
+        let hbForm = document.forms[i]; // form 1개
+        let frd = {
+            name: hbForm.fname.value,
+            age: hbForm.fage.value
+        }
+        hbFrds.push(frd);
+    }
+    console.log("최종 보낼 데이터: ", JSON.stringify(hbFrds));
+}
+
+
+
+function fshow()      {//복제 하기
+    //let frd = temp.cloneNode();     //-----메모리상 복사 (얕은 복사; 쓸모없는 복사)
+    let frd = temp.cloneNode(true);     //-----메모리상 복사 (깊은 복사; true를 매개값으로 부여)
+    frd.style.display = "block";
+    flist.appendChild(frd);         //-----화면에 넣기
+}
+function fcancel(pBtn){//취소 처리
+    let cloneDiv = pBtn.closest("#temp");
+    cloneDiv.remove(); 
+}
+function fadd(pBtn)   {//추가 처리
+
+}
+</script>

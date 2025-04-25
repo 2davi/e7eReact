@@ -1,0 +1,129 @@
+<!DOCTYPE html>
+<meta charset="UTF-8">
+<button onclick="fAjax()">눌러방</button>
+<script>
+    /* 예솔 질문 Very Good!
+    function yesol(res){
+        alert(res);
+    }
+    yesol("예솔");
+    */
+
+    // DRY 원칙에 따라 반복을 줄여야 함!
+    function fAjax(){
+        /*
+        ajax1("get", "data.json", function(rslt){
+            console.log("받은 결과는 : ", rslt);
+        })  //줄이 길어서 호출은 먼저 해도 나중에 결과를 줌
+        
+        ajax1("get", "data.txt", function(rslt){
+            console.log("받은 결과는 : ", rslt);
+        })  //줄이 짧아서 호출이 나중이어도 먼저 결과를 줌
+        //ajax는 호출의 순서가 결과의 순서로 이어지진 않음. 결과 순서 모름.
+        */
+        /*
+        ajax2({
+            method:"get",
+            url:"data.json",
+            async:false,
+            cb:function(rslt){
+                console.log("서버로부터 받은 값은: ", rslt);
+            }
+        })
+        
+        ajax2({
+            method:"get",
+            url:"data.txt",
+            async:false,
+            cb:function(rslt2){
+                console.log("서버로부터 받은 값은: ", rslt2);
+            }
+        })
+        */
+        $.ajax({
+            method:"get",
+            url:"data.json",
+            async:false,
+            dataType:"json",  // 이걸 다 엉터리 답변함, 서버가 json으로 변환해준다고 함!=> 거짓말
+            //서버는 text나 바이너리로만 우리에게 줄수있지 json객체로 만들어줄 수 없음
+            //(정확한 답변)  서버에서 받은 결과에 JSON.parse를 하라! (해서 스크립트 객체로 만들라)
+            cb:function(rslt){
+                console.log("서버로부터 받은 값은: ", rslt);
+            },
+
+        })
+        
+        $.ajax({
+            method:"get",
+            url:"data.txt",
+            async:false,
+            dataType:"text",
+            cb:function(rslt2){
+                console.log("서버로부터 받은 값은: ", rslt2);
+            },
+            // 만약 jquery ajax 쓰게 되면 그냥 1개 붙여서 쓰깅
+            error: function (xhr) {
+                console.log("code: " + xhr)
+            }
+        })
+    }
+    
+    // 1단계 변형, 공통으로 쓸 함수 - 한번만 만들어놓고 계속안써도됨
+    //공통모듈팀(연봉높)이 이런거 만들어서 개발자들이 쓰게 배포해줄거
+    /*
+    function ajax1(method,url,cb){
+        // XMLHttpRequest는 지역변수로
+        let xhr = new XMLHttpRequest();
+        xhr.open(method,url,true);
+        xhr.onload = ()=>{
+            cb(xhr.responseText);
+            //console.log("받은 결과 ", xhr.responseText);
+            // 결과를 받아서 처리하는 부분
+            // 여기서 함수명(xhr.responseText) 이런식으로 처리한다면 좋을 듯
+        }
+        xhr.send();
+    }
+    */
+
+
+    // 2단계 변형, 공통으로 쓸 함수
+    /*
+    function ajax2(pOpt){       // pOpt는 {}로 받을 것임        
+        let xhr = new XMLHttpRequest();
+        xhr.open(pOpt.method, pOpt.url, pOpt.async);
+        xhr.onload = ()=>{
+            pOpt.success(xhr.responseText);  // 함수 호출
+            //pOpt에 전부 담아 보냈기 때문에 pOpt에서 꺼내야 
+            //pOpt.으로 꺼내거나, 배열식접근법(대괄호[]이용)
+            //console.log("받은 결과 ", xhr.responseText);
+            // 결과를 받아서 처리하는 부분
+            // 여기서 함수명(xhr.responseText) 이런식으로 처리한다면 좋을 듯
+        }
+        xhr.send();
+    }
+    */
+
+    // jQuery Ajax 모양의 탄생!  -> 별거 없음, 그저 매개변수 처리와 , 네임스페이스 처리
+    // 자바스크립트에서 변수명으로 쓸 수 있는 특수문자는(2개)? _, $
+
+    const $ = {};  // 여기선 일부러 빈객체로, 네임스페이스용
+
+    // 3단계 변형, 네임스페이스(현실에 비유하면 브랜드명 또는 지역명.고유) 주기  //충돌(로인한 덮어쓰기)방지, 디렉토리임
+    $.ajax = function(pOpt){      // pOpt는 {}로 받을 것임        
+        let xhr = new XMLHttpRequest();
+        xhr.open(pOpt.method, pOpt.url, pOpt.async);
+        xhr.onload = ()=>{
+            if(pOpt.dataType == "json"){
+                pOpt.success(JSON.parse(xhr.responseText));  // 함수 호출
+            }else{
+                pOpt.success(xhr.responseText);  // 함수 호출
+            }
+            //pOpt에 전부 담아 보냈기 때문에 pOpt에서 꺼내야 
+            //pOpt.으로 꺼내거나, 배열식접근법(대괄호[]이용)
+            //console.log("받은 결과 ", xhr.responseText);
+            // 결과를 받아서 처리하는 부분
+            // 여기서 함수명(xhr.responseText) 이런식으로 처리한다면 좋을 듯
+        }
+        xhr.send();
+    }
+</script>

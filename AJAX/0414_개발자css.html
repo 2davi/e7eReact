@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<meta charset="UTF-8">
+<style>
+    /* flex, grid를 시간내서 꼭 한번은 읽어봐야 함 */
+    /*
+    div{
+        display: inline-block;
+        border: 3px solid black;
+    }
+    */
+    #wrapper{
+        border: 30px groove gold;
+        position: relative;  /* 부모 레러티브, 자식 앱솔루트 주면 부모 따라 움직임 */
+        left: 200px; top: 200px;
+        width: 200px;
+        height: 200px;
+        overflow: hidden;  /* 슬라이더(전자앨범?) 만들때 많이 사용 //부모가 액자가 됨*/
+        /* overflow: auto; */
+    }
+    #sy {
+        position: absolute;
+        left: 0; top: 0;
+        width: 820px;
+        height: 200px;
+    }
+</style>
+<button onclick="fMove()">눌러방</button>
+<div id="wrapper">
+    <div id="sy">
+        <img width="200" height="200" src="https://previews.123rf.com/images/lufimorgan/lufimorgan1504/lufimorgan150400439/39312451-%EA%B7%80%EC%97%AC%EC%9A%B4-%EC%9E%91%EC%9D%80-%EC%8B%9C%EB%B2%A0%EB%A6%AC%EC%95%88-%EA%B1%B0%EC%B9%9C-%EA%B0%95%EC%95%84%EC%A7%80-%EC%95%89%EC%95%84%EC%84%9C-%EB%85%B9%EC%83%89-%EC%9E%94%EB%94%94%EC%97%90-%EB%88%88%EC%9D%84-%EA%B0%90-%EC%9C%BC%EB%A9%B4%EC%84%9C.jpg" alt="">
+        <img width="200" height="200" src="https://images.mypetlife.co.kr/content/uploads/2018/07/09160209/beagle-2839706_1280-1024x682.jpg" alt="">
+        <img width="200" height="200" src="https://img.freepik.com/free-photo/top-view-wooden-cross-leaves-arrangement_23-2149366131.jpg?t=st=1744601418~exp=1744605018~hmac=1f2142e10381cc6f3f3aac050324724408f1387931086e4359dd729922d7fe5f&w=740" alt="">
+        <img width="200" height="200" src="https://rockidentifier.com/image-handle/image/1080/153658549614936072.jpeg?x-oss-process=image/format,webp/resize,s_300&v=1.0" alt="">
+    </div>
+</div>
+<script>
+// position, display, transform, overflow
+const sy = document.querySelector("#sy");
+let mvW = 5;
+function fMove(){
+    if(!sy.style.left) sy.style.left="0px";
+    // 오늘의 로직훈련 숙제.
+    // 마지막 그림이 부모에 차면, 방향 바꿔서 오른쪽으로 가깅
+    // 첫번째 그림이 부모에 차면, 방향 바꿔서 왼쪽으로 가깅
+
+    sy.style.left = parseInt(sy.style.left) -mvW + "px";
+    let acjaLeft = parseInt(sy.style.left);
+    if(acjaLeft <= -600 || acjaLeft >= 0){
+        mvW = -mvW;
+    }
+    
+    setTimeout(fMove,200);
+}
+</script>

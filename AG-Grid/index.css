@@ -1,0 +1,42 @@
+@keyframes animatedTextGradient {
+  to {
+    background-position: -200% center;
+  }
+}
+ 
+.ag-header-cell-text {
+  background: linear-gradient(
+    90deg,
+    red,
+    orange,
+    yellow,
+    green,
+    blue,
+    indigo,
+    violet,
+    red
+  );
+  font-weight: 600;
+  font-size: 20px;
+  animation: animatedTextGradient 2.5s linear infinite;
+  background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-size: 200% auto;
+}
+ 
+/*  ag-grid 페이지 판넬 부분 스타일링 */
+.ag-paging-panel {
+  background-color: blueviolet;
+}
+ 
+.ag-picker-field-display {
+  color: yellow;
+}
+ 
+.ag-paging-row-summary-panel {
+  color: skyblue;
+}
+ 
+.ag-paging-page-summary-panel {
+  color: greenyellow;
+}

@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<meta charset="utf-8">
+<script>
+  const arin = [
+    {name: "아린1"},
+    {name: "아린2"},
+    {name: "아린3"},
+    {name: "아린4"}
+  ];
+
+  //데이터 추가
+  const arin2 = [...arin, {name:"아린만세"}]; //메모리 낭비, but! 이유 있는 메모리 낭비!
+  //객체 변화 내용을 추적이 가능해짐.... REACT는 이런 바뀐 상태 변화 추적이 필요한 프레임워크
+  console.log("체킁: ", arin2);
+
+
+  function fHB() {
+    
+    const add = (a, b) => {
+      return a + b;
+    }
+    const minus = (a,b) => {
+      return a - b;
+    }
+
+    //return [ add, minus ];  // 1.구조분해 배열
+    return { add, minus };// 2.구조분해 객체
+  }
+  const { add:ㅡㄷ개ㅜㅎ } = fHB();
+  //alert(add(add(3, 4), add(6,9)));
+  alert(ㅡㄷ개ㅜㅎ(8, 5));
+
+  //const [ ,hateSumin ] = fHB();
+  //alert(hateSumin(hateSumin(9,6),hateSumin(13,2)));
+</script>

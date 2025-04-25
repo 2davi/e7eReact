@@ -1,0 +1,21 @@
+<!DOCTYPE html>
+<meta charset="utf-8">
+<script>
+// 구조 분해를 모르고 프론트 프레임워크 하는 사람들이 프론트 프레임워크를
+// 자바스크립트가 아니고 새로운 언어로 착각하는 경우가 생각보다 많이 있음!
+
+// 구조 분해는 객체에서 값을 빨리 뽑아쓰기 위해서 만들어졌는데
+// 알고 보면 그냥 쉬움
+// = 기준, 양쪽이 같은 데이터 타입이어야 함!
+
+let names = ["상진", "태수", "철민", "재윤"];
+//let tasu = names[1];
+//let jaun = names[3]; 이것도 코드가 길다 ^ㅃ^
+
+let [sj, , cm, ] = names; //배열에 대한 구조 분해
+alert(sj+ "  " +cm);
+
+let hjInfo = {name:"현정", age:20, special:"히미한 히미 히미하게 있음"};
+let { special, name } = hjInfo;
+alert(name + special);
+</script>

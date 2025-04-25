@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<meta charset='utf-8'>
+<input type="text" id="sy" value="상윤">
+<script>
+    let merong = document.querySelector("#sy").value; // 복사? 참조?
+    alert(typeof(document.querySelector('#sy').value)); //String 원시타입(Primative);
+    merong = "안상윤";
+
+    let merong2 = document.querySelector("#sy");    // <= 속성을 가진 객체(Object);
+    console.log("체킁 " ,merong2);  // 항상 이상하면 눈으로 확인!
+    merong2.value = "정상윤"; // 바뀔깡?
+
+
+    // 복사(copy)와 참조(reference)는 절대 알아야 함!
+    let chan = "찬영";
+    //alert(typeof(chan)); //데이터 타입 확인
+    
+    let young = chan; // <=여기서의 동작이 복사가 이루어짐!
+    young = "영찬";
+    //alert(chan); //?    찬영!!
+
+    let chanInfo = { name: "찬영" };
+
+    let tg = chanInfo;  // 여기서의 동작이 참조(별명)가 이루어짐!
+    tg.name = "태규";
+    //alert(chanInfo.name);   //? 찬영!!, 이 대답은 엄청나게 위험해!
+    
+/*  언제 복사가 일어나고, 언제 참조가 일어나는가?
+    └복사: 원시타입(Primative) ||속성도 메소드도 없음, 그 자체 [number, string, boolean이고, null/undefined는 예외]
+    └참조: 객체타입(Object)    ||원시타입 아닌 거는 전부
+*/
+</script>

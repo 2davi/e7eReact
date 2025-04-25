@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html lang="en">
+    <meta charset="UTF-8">
+    <title>AJAX 큰 틀만 만들어놓고 오늘 마무리하장^0^</title>
+    <div id="arin"></div>
+    <script>
+
+        const arin = document.querySelector("#arin");
+
+        // AJAX Asynchronouse JAvascript Xml
+        // 비동기?, 우리 현실에서 비동기 아닌 걸 찾기가 어려워
+        /*
+            옛날에는 CPU가 한 개 짜리 개짜리몽땅 허접컴퓨터^ㅂ^
+            이제는 CPU도 여럿이 기본이라, 평행프로그래밍이 대세
+            구글이 Gmail, Gmap을 AJAX로 프로그래밍에 성공^0^
+            근데 비동기는,
+            일이 끝나는 순서가 명확하지 않아서 어려움.
+            우리는 로직을 짤 때, "끝나면 ~~를 한다"고만 기억하면 됨
+        */
+        
+        //○비동기 핵심 통신 객체, 현실에선 퀵서비스
+        // 퀵서비스 아저씨는 각 함수마다 필요한 순간에 부르자.
+        // 상황 상 문제 소지가 많아서 xhr은 전역변수로 쓰지 않도록 주의해야 함!
+        // 다행인 건 원본 AJAX를 쓰지 않는 이상 이건 여러분이 걱정 안 해도 됨! 껄껄^0^
+        // 우리는 fetch나, 엑시오스 라이브러리를 쓸 것이고, 그 안에서 알아서 원본ajax를 선언하고 일시키고 다 해줌
+        let xhr = new XMLHttpRequest();
+        xhr.open("GET", "0411_data.txt", true);              //<- 할 일 지정.
+//      xhr.send();                                     //<- 까라면 까세용^0^
+
+        //○비동기 모니터링을 시스템이 제공해줌 ==> 이벤트로써
+        /* 상태값은 0~4, 우리는 4만 관심있엉 */
+        /*xhr.onreadystatechange = function(){
+            //<- 끝났당^Q^? ...진짜?  ┌─ 확정 싸인까지 받아옴 ^3^
+            if(xhr.readyState == 4 && xhr.status == 200) {
+                //서버에서 받은 데이터를 내 맘대로 쓸 수 있는 지점.
+                console.log("서버에서 받은 결과: ", xhr.responseText);
+                alert("끝났어요 주인님!!!~~");
+                arin.innerHTML = xhr.responseText;
+            }
+        };*/
+        // onreadystatechange && 200 조건까지 포함한 명령 => onload
+        xhr.onload = function(){
+            console.log("서버에서 받은 결과: ", xhr.responseText);
+            alert("끝났어요 주인님!!!~~");
+            arin.innerHTML = xhr.responseText;
+        };
+        xhr.send();                                     //<- 까라면 까세용^0^
+
+        //○또 하나의 프로세스가 시작되는 건가... 내 안의 또다른 나
+        alert("안농 나야나 학범이..//^ㅂ^") //<- 이게 먼저 뜨면 앞선 작업이 비동기라는 의미.
+    </script>

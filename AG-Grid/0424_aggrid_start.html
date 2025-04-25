@@ -1,0 +1,87 @@
+<!DOCTYPE html>
+<html lang="ko">
+  <head>
+    <meta charset="UTF-8" />
+    <title>E7E Ag-Grid 시작 예제</title>
+    <!-- 하는 김에 괘니 tailwindcss도 적용해 보깅 -->
+    <script src="https://cdn.jsdelivr.net/npm/@tailwindcss/browser@4"></script>
+    <style type="text/tailwindcss">
+      .e7e {
+        @apply text-center text-3xl my-1 pb-4 rounded bg-blue-500 px-4 py-2 font-bold text-white hover:bg-blue-600;
+      }
+    </style>
+    <!-- tailwindcss 적용 끝, production mode에선 사용하지 말것-->
+    <script src="https://cdn.jsdelivr.net/npm/ag-grid-community/dist/ag-grid-community.min.js"></script>
+    <link rel="stylesheet" href="index.css" />
+  </head>
+ 
+  <body>
+    <h1 class="e7e">대덕 에스파 출동</h1>
+    <!-- 테마는 quartz, balham, material,alpine 있음 -->
+    <div id="e7eGrid" class="ag-theme-quartz-dark w-full h-100"></div>
+    <script type="module">
+      // 샘플 ROW 데이타 정의, DB Select의 1줄 Row들의 모임 list가 될거시당
+      const rowData = [
+        {
+          name: "경미닝",
+          birth: "2000-03-03",
+          nationality: "한국",
+          special: "기획",
+        },
+        {
+          name: "선주닝",
+          birth: "1999-09-09",
+          nationality: "한국",
+          special: "비동기",
+        },
+        {
+          name: "카리나",
+          birth: "2000-04-11",
+          nationality: "한국",
+          special: "리액트",
+        },
+        {
+          name: "지젤",
+          birth: "2000-10-30",
+          nationality: "일본",
+          special: "JSP",
+        },
+        {
+          name: "윈터",
+          birth: "2001-01-01",
+          nationality: "한국",
+          special: "바닐라JS",
+        },
+        {
+          name: "닝닝",
+          birth: "2002-10-23",
+          nationality: "중국",
+          special: "마이바티스",
+        },
+      ];
+ 
+      // 통합 설정 객체, 아주 많은 속성들이 제공됨(일단 몇개만)
+      const gridOptions = {
+        theme: "legacy",
+        rowData: rowData,
+        columnDefs: [
+          // 컬럼 정의
+          { field: "name", headerName: "이름" },
+          { field: "birth", headerName: "생일" },
+          { field: "nationality", headerName: "국적", filter:true},
+          { field: "special", headerName: "담당" },
+        ],
+        autoSizeStrategy: {
+          // 자동사이즈정책
+          type: "fitGridWidth", // 그리드넓이기준으로
+          defaultMinWidth: 150, // 컬럼 최소사이즈
+        },
+        rowHeight: 45, // row 높이지정
+      };
+ 
+      const gridDiv = document.querySelector("#e7eGrid");
+      //요기가 grid를 생성하는 부분!!
+      const gridApi = agGrid.createGrid(gridDiv, gridOptions);
+    </script>
+  </body>
+</html>

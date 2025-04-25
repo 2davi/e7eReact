@@ -1,0 +1,19 @@
+<!DOCTYPE html>
+<meta charset="UTF-8">
+<script>
+// 멋진말로 시리얼라이즈(직렬화) <=> unserialize(객체화)
+// 그냥               문자열  <=>  객체화
+//              JSON.stringify <=> JSON.parse
+// 전송 & 객체 저장용(프로그램의 이전 상태를 그대로 복구하려 할 때)
+//        브라우져에서 돌아가는 자바스크립트는 보안상 사용자 PC에 파일을
+//        만들 수 없어서 해당 사항(저장) 없음, 단 다운로드는 됨!
+
+// JSON 유틸에 문제가 있음!
+let testObjStr = '{"name":"현정","age":20}';  // 바깥쪽을 싱글 따옴표, 안쪽을 더블 따옴표
+//바깥의 양쪽에 쌍따옴표 붙였으니 문자열임. 안붙이면 객체 -> 문제 생김 -> 바깥을 홑따옴표로...
+//객체와 문자열은 자바스크립트에서 무게 차이가 큼
+let rslt = JSON.parse(testObjStr);
+console.log("체킁: ", rslt);
+
+
+</script>

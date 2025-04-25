@@ -1,0 +1,22 @@
+<!DOCTYPE html>
+<meta charset="utf-8">
+<script>
+  const shManse = "올림픽 성화 만만세";
+</script>
+<script type="module">
+  //import { multi, add } from "./merong.js";
+import sangjin, { minus } from "./0422_merong.js";
+import {minus as hminus} from "./0422_hsic.js";
+  alert(hminus());
+  alert(sangjin(3,3));
+const nhManse = "남혁만세";
+  //alert(minus(5,2));
+  //alert(multi(3,3)); //9
+  //alert(add(3,3));
+//브라우져 모듈 지원은 얼마 되지 않았음
+//NodeJS(OS 위에서 자바스크립트를 쓸 수 있음, require, import/export(브라우저는 이것만 지원.))
+</script>
+<!-- 모듈은 분리되어 있어서 서로 모름! (isolation) -->
+<script type="module">
+alert(shManse);
+</script>

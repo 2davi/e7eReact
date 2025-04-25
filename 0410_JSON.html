@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<meta charset="utf-8">
+<script>
+    /*  ■ JSON => JavaScript Object Notation
+        □ 데이터 교환의 표준으로 웹개발의 필수!
+        - .점 접근법이 효율적. 성능도 좋고 빠름
+        - 특별한 경우에 배열식 접근법이 유용.
+          └─속성명을 동적(Dynamic)으로 제어 가능!
+
+        = JSO의 속성값은 자동 문자열 처리.
+    */
+   let name = "메롱";
+
+    const ysInfo3 = {};
+    ysInfo3[name] = "예솔"; // 속성명을 동적(Dynamic)으로 제어 가능!
+    ysInfo3["age"] = 20;
+
+    const ysInfo = {
+        name,       // <=> name: name, KEY값과 VALUE에 쓸 변수명이 같을 때!!
+        age: 20,
+        insa: function(){
+            alert("방가방가 ^0^ 나 예솔이얌!! 메롱");
+        }
+    }
+    
+    // JSON 객체의 속성을 없애고 시픔
+    delete ysInfo.age;
+    ysInfo.insa();
+
+    console.log(ysInfo3, ysInfo);
+
+    const ysInfo1 = {};
+    ysInfo1.name = "예솔";
+    ysInfo1.age = 20;
+
+    // 요게 중요, 
+    // 배열식 접근법, 이건 모르면 상황이 엄청 어려워지는 케이스 발생
+    const ysInfo2 = {
+        ["name"]: "예솔",
+        age: 20
+    };
+    //console.log(ysInfo, ysInfo1, ysInfo2, ysInfo3);
+
+</script>

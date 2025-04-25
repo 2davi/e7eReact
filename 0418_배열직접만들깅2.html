@@ -1,0 +1,96 @@
+<!DOCTYPE html>
+<html lang="en">
+<meta charset="utf-8">
+<!-- 배열에 자주쓰는 중요 메소드를 만들어봅시다. feat.call-back -->
+<script>
+
+function Arin() {       //<+=Arin은 내맘대로 배열임
+    this.length = 0;
+}
+Arin.prototype.push = function(pArg) {
+    this[this.length] = pArg;
+    this.length++;
+    return this;
+}
+//forEach; callback 사용
+Arin.prototype.forEach = function(cb) {
+    for(let i=0; i<this.length; i++) {
+        cb(this[i], i);
+    }
+    return this;
+}
+//map; 이건 특히 프론트 프레임워크에서 엄청나게 미친듯이 많이 씀!
+//내가 받은 빅데이터를 내가 원하는 형태로 전처리하기 위해 쓰이는 메소드 map.
+// .map()은 항상 새로운 배열을 반환하게 되어있음!
+Arin.prototype.map = function(cb) {
+    let newArr = [];    // 새로 만든 배열을 return 할 준비
+    for(let i=0; i<this.length; i++) {
+        newArr[i] = cb(this[i], i);     // newArr.push(cb(this[i], i)); newArr을 Arin()으로 만들 때.
+    }
+    return newArr;
+}
+//filter; 이것도 미친듯이 많이 씀, 골라내기!
+Arin.prototype.filter = function(cb) {
+    let newArr = [];
+    for(let i=0; i<this.length; i++) {
+        if(cb(this[i], i)) {  //※※CALL-BACK 함수가 TRUE를 RETURN했을 때에만..!
+            newArr.push(this[i]);
+        }
+    }
+    return newArr;
+}
+
+//sort; map이나 filter보단 빈도가 적으나, 꽤나 자주 쓰임! 유용
+Arin.prototype.sort = function(cb) {
+    for(let j=0; j<this.length; j++) {
+        for(let i=j+1; i<this.length; i++) {
+      //┌─←─if( this[j] > this[i] ) {
+      /*└→*/if( cb(this[j], this[i]) >0 ) {
+                let temp = this[j];
+                this[j] = this[i];
+                this[i] = temp;
+            }
+        }
+    }
+}
+///■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■TESTING AREA■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■///
+const testArin = new Arin();
+testArin.push("수민").push("성운").push("예솔").push("학범").push("윤석");
+testArin.forEach(function(val, index) {
+    console.log("체킁: ", val, ", ", index);
+});
+
+const ntestArin = testArin.map(function(val, index) {
+    //return "안녕 " + val + "아! ^0^";
+    if(val =="수민") return `<h1>${val}</h1>`; //if만 이렇게 써놔도, 
+    return;     //map함수에서는 반복돌리기 때문에 생략된 return문에 의한 undefined값들이 반환
+});
+console.log("체로롱: ", ntestArin);
+// for(let i=0; i<ntestArin.length; i++){
+//     console.log(typeof ntestArin[i]);
+//     if(typeof ntestArin[i] == "undefined")
+//         delete ntestArin[i];
+// }
+// console.log("체로롱로ㅗㄹㅇ: ", ntestArin);
+
+const sjArr = testArin.filter(function(val, index) {
+    
+    //○ 수민 0, 예솔 2, 윤석 4 만 담고 싶다...
+    //if(index==0 || index==2 || index==4) return true; //┐
+    if( !(index %2) ) return true;                        //┘
+    return false;   //생략 가능 하지만 가독성에 좀더 무게를 주는게 좋음! (다같이 보는 코드니까^Q^)
+    
+    //○ 학범 만 담고 싶다...
+    //if(val=="학범") return true;
+    //return false;
+});
+console.log("체크얌: ", sjArr);
+
+
+testArin.sort((a, b) => {
+    if(a<b) return 1;
+    return -1;
+});
+console.log("체-킁: ", testArin);
+</script>
+</html>

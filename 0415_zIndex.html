@@ -1,0 +1,87 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Document</title>
+<style>
+    /* position, display, trnasform, overflow, z-index, => flex, grid */
+    #container{
+        position: relative;
+        width: 300px;
+        height: 300px;
+        border: 1px solid pink;
+    }
+    .hb{
+        position: absolute;
+        background-color: rgba(0, 0, 255, 0.534);
+        font-size: 5em;
+        color: white;
+    }
+</style>
+</head>
+<body>
+
+<div id="container">
+    <div class="hb" id="y1">예</div>
+    <div class="hb" id="y2">솔</div>
+    <div class="hb" id="y3">만</div>
+    <div class="hb" id="y4">세</div>
+</div>
+<button onclick="fRot()">순서대로 돌리깅</button>
+<script>
+    /*  후치연산
+        먼저 값을 넘기고 1을 증가한다.
+    */
+    let hjNum = 5;
+    //let ck1 = hjNum++;
+    //alert(ck1); //? 5
+    let ck1 = hjNum;
+    alert(ck1);
+    hjNum = hjNum + 1;
+    
+    ck1 = ++hjNum;
+    alert(ck1); //? 7
+
+    const hbs = document.querySelectorAll(".hb");
+    
+    window.addEventListener("DOMContentLoaded", () => {
+        //hbs[0].style["z-index"] = 1;  <-배열식 접근법으로도 가능
+        hbs[0].style.zIndex = 1;      //<-보통의 경우 성능이 나은 .접근법을 사용
+    });
+
+    let tgIndex = 0; //초기값
+    let tgZIndex = 1;
+    function fInit(){
+        for (let i=0; i<hbs.length; i++){
+            hbs[i].style.zIndex = 0;
+        }
+    };
+    function fRot() {
+        tgIndex++;
+        if(tgIndex==4) {
+            tgIndex=0;
+            //fInit();
+            tgZIndex++;
+        }
+        hbs[tgIndex].style.zIndex = tgZIndex;
+        console.log(tgIndex);
+        setTimeout(fRot, 500);
+    };
+    
+    
+    // window.addEventListener("load", () => { // image등(동영상은 제외) 비동기 작업도 끝났을 때
+    //     alert("수민 메롱");
+    // });
+    // window.addEventListener("DOMContentLoaded", () => { // DOM만 로딩되면 = 태그 해석 끝날 때
+    //     alert("아린 메롱");
+    // });
+    /*  ▒Document Object Model
+        -문서객체모델, 태그들의 트리 구조
+        -       html태그-root component
+        -head           body
+        -트리구조 위에서 DOM을 제어하는 것. 화면 제어는 DOM을 기반으로 함.
+    */
+</script>
+
+</body>
+</html>

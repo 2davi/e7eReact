@@ -1,0 +1,84 @@
+<!DOCTYPE html>
+<meta charset="UTF-8">
+<style>
+    body {
+  font-family: "Open Sans", -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Oxygen-Sans, Ubuntu, Cantarell, "Helvetica Neue", Helvetica, Arial, sans-serif; 
+}
+</style>
+<!-- SweetAlert 설치 끝 -->
+<script src="https://cdnjs.cloudflare.com/ajax/libs/sweetalert2/11.16.1/sweetalert2.min.js" integrity="sha512-LGHBR+kJ5jZSIzhhdfytPoEHzgaYuTRifq9g5l6ja6/k9NAOsAi5dQh4zQF6JIRB8cAYxTRedERUF+97/KuivQ==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/sweetalert2/11.16.1/sweetalert2.min.css" integrity="sha512-WnmDqbbAeHb7Put2nIAp7KNlnMup0FXVviOctducz1omuXB/hHK3s2vd3QLffK/CvvFUKrpioxdo+/Jo3k/xIw==" crossorigin="anonymous" referrerpolicy="no-referrer" />
+<button id="hbBtn">눌러봥</button>
+<button onclick="fAlert()">달달한 alert 띠우깅</button>
+<script>// this?
+// next.js 프론트/백엔드 전부 자바스크립트로 땜빵하는 언어.
+function fAlert() {
+    let timerInterval;
+    Swal.fire({
+        title: "오늘은 일찍 퇴근해!",
+        html: "I will close in <b></b> milliseconds.",
+        timer: 2000,
+        timerProgressBar: true,
+        didOpen: () => {
+            Swal.showLoading();
+            const timer = Swal.getPopup().querySelector("b");
+            timerInterval = setInterval(() => {
+                timer.textContent = `${Swal.getTimerLeft()}`;
+            }, 100);
+        },
+        willClose: () => {
+            clearInterval(timerInterval);
+        }
+    }).then((result) => {
+        /* Read more about handling dismissals below */
+        if (result.dismiss === Swal.DismissReason.timer) {
+            console.log("I was closed by the timer");
+        }
+    });
+}
+
+
+function fCk(pName, pName2) {
+    //alert("안농 " + pName + " " + pName2);
+    console.log(this);
+}
+//fCk();  //--> 여기서 this는 Window..  <==> window.fCk();
+fCk("성화", "남혁");
+//전역함수 선언은 윈도우 객체에 메소드 추가..
+//전역변수 선언은 윈도우 객체에 속성 추가..
+
+
+const suminInfo = {
+    name: "수민",
+    major: "멀티"
+}
+suminInfo.msg = fCk;//참조  "msg라는 별명이 함수fCk를 가리킨다."
+suminInfo.msg();    //--> 여기서 this는 suminInfo..  <==> object.msg();
+
+
+/* 설명을 들으니, 이해는 돼! 근데 이딴식으로 프로그램을 하게 되면 문제가 느껴져! */
+//당근 개발자들이 반항함.. 이딴식으로는 힘들겠는걸... this그럼 못써
+//this제어를 위한 걸 바로 만들어 줌. call/ apply/ bind/
+//this가 가리키는 값을 직접 지정이 가능하도록!(이젠 따질 필요가 없음)
+
+suminInfo.msg.call({name:"학범"}, "성화", "남혁"); //1st parameter에 this가 가리켜야 할 값을 부여
+fCk.apply(["상진","태수","철민"], ["성화", "남혁"]);//call == apply, but 기존의 매개변수를 배열에 묶어서 줘야 함. 무조건 인자가 2개
+//bind가 애매하다.
+const hbBtn = document.querySelector("#hbBtn");
+function fClick(pName) {
+    alert(pName + "님아 눌렀닝??");
+    console.log(this);
+}
+
+//-->괄호를 붙이면 반환값 undefined가 발생
+//bind 흉내를 한 번 내보면, 함수를 return해주는데, 그 함수가 매개변수값을 호출해줌
+//hbBtn.addEventListener("click", fClick.bind(null, "윤석"));
+hbBtn.addEventListener("click", () => {
+    fClick("윤석");
+});//문법은 call과 똑같음
+
+/* call은 바로 함수를 호출해버리고,
+   bind는 내부적으로 함수를 선언하여 그 함수의 포인터(이름)을 반환함 
+   .bind자리만 남겨놓고 쏙 빠지는 격. */
+
+</script>

@@ -1,0 +1,16 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<title>안중요, tabindex="0"준 건 중요해!</title>
+</head>
+<body>
+    <!--div처럼 원래 포커싱이 없던 요소에 기능을 주기 위해서 ="0"으로 초기값 할당해 ^ㅂ^ -->
+<input type="text" tabindex="3" value=""><br>
+<input type="text" tabindex="-1"value=""><br>
+<!-- tabindex에 -1 넣으면, tab으로 절대 포커싱 안 됨 -->
+<input type="text" tabindex="1" value="" autofocus><br>
+<input type="text" tabindex="4" value=""><br>
+<input type="text" tabindex="5" value=""><br>
+</body> 
+</html>

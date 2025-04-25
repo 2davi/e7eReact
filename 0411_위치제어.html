@@ -1,0 +1,151 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <!-- static(시작은 기본) => relative(추가제어) => absolute(더 추가제어) -->
+    <meta charset="UTF-8">
+    <title>위치제어하깅</title>
+<style>
+    #wrapper{
+        position: relative;
+        left: 200px;
+        top: 100px;
+        width: 900px;
+        height: 700px;
+        border: 3px solid pink;
+    }
+    #smBall{
+        /* 부모 따라가는 중...
+           (relative 자식 absolute)
+        /* 부모의 position이 relative이면
+           부모의 왼쪽 모서리가 기준점이 됨 */
+        position: absolute;
+        width: 50px;
+        height: 50px;
+        left: 0; top:0;
+        border-radius: 50%;
+        background-color: darkred;
+        /*transform: skewX(45deg);*/
+    }
+    #smBar{
+        position: absolute;
+        left: 40px;
+        top: 600px;
+        width: 150px;
+        height: 30px;
+        background-color: violet;
+        border-radius: 10%;
+    }
+</style>
+</head>
+<body>
+    <button onclick="smProx()">눌러방^ㅂ^</button>
+    <button onclick="smStop()">멈춰방0ㅂ0</button>
+    <!-- focus를 받을 수 있는 상태로 만들어주는 attr => tabindex => 키 이벤트 가능 -->
+    <div id="wrapper" tabindex="0" onkeydown="smBarMove()">
+        <div id="smBall"></div>
+        <div id="smBar"></div>
+    </div>
+<script>
+    const smBar = document.querySelector("#smBar");
+    if(!smBar.style.left) smBar.style.left = "30px";
+    if(!smBar.style.top) smBar.style.top = "600px";
+    // 주말에 너무 심심하다면, 그렇다면 막대로 공 막아내기 숙제를...
+    // 그냥 로직훈련임, 보이는 걸 가지고 훈련하는게 집중력이 좋음
+
+    // 꼭 한 번씩 보고 정리할 것 (20~30분은 정리 시간을 꼭 가져야 함)
+    function smBarMove(){
+        //키값 읽기
+        //alert(event.key);
+        console.log(event.keyCode);
+        let keyNum = event.keyCode;
+        if(keyNum==37){ //leftArrow
+            if(parseInt(smBar.style.left)>=20)
+                smBar.style.left = parseInt(smBar.style.left) - 20 + "px";
+        }
+        if(keyNum==39){ //rightArrow
+            if(parseInt(smBar.style.left)<=747)
+            smBar.style.left = parseInt(smBar.style.left) + 20 + "px";
+        }
+        if(keyNum==38){
+            smBar.style.top = parseInt(smBar.style.top) - 20 + "px";
+        }
+        if(keyNum==40){
+            smBar.style.top = parseInt(smBar.style.top) + 20 + "px";
+        }
+
+    }
+
+
+    let timerId; //전역으로 선언
+    function smStop(){
+        clearTimeout(timerId);
+        isStart = false;
+    }
+
+    // Proxy 패턴(개인적으로 아주 많이 추천!!)
+    let isStart = !"나는아직졸려"; //아직 시작하지 않은 상태
+    function smProx(){
+        //clearTimeout(생략);
+        //smStart();
+        
+        if(!isStart){
+            smStart();
+            isStart = !0;
+        }
+    }
+
+
+
+    // 현재 버튼을 누르면 빨라지는데, 안 빨라지게
+    // 제한시간 5분!
+    const smBall = document.querySelector("#smBall");
+
+    let mvX = 1;
+    let mvY = 1;
+    let gakdo = 0; //각도
+    function smStart(){
+        gakdo = gakdo + 10;
+        //디자이너의 눈을 피해 초기값 css 설정하기 ^0^
+        if(!smBall.style.left){
+            smBall.style.left = "0px";
+            smBall.style.top  = "0px";
+        }
+        smBall.style.transform = "rotateY("+ gakdo +"deg)";
+        smBall.style.left = parseInt(smBall.style.left) + mvX + "px";
+        smBall.style.top = parseInt(smBall.style.top) + mvY + "px";
+        //parseInt는 숫자와 문자 섞여있을 시, 문자가 나오는 시점 이후를 잘라내버림.
+        //parseInt("10px") = 10; 완전 프론트 편의적이자낭^0^
+        
+        //왼쪽에 부딪히거나, 오른쪽에 부딪히거낭
+        let ballRightCoordinate = parseInt(smBall.style.left) + 50;
+        if(ballRightCoordinate >= 900 || ballRightCoordinate <=50){
+            mvX = -mvX;     // 변수로 방향을 바꾸는 테크닉!
+            smBall.style.transform = "skewY(45deg)";
+        }
+
+        let ballTopCoordinate = parseInt(smBall.style.top);
+        if(ballTopCoordinate >=650 || ballTopCoordinate <= 0){
+            mvY = -mvY;
+            smBall.style.transform = "skewX(45deg)";
+        }
+
+        if( (parseInt(smBall.style.left)+25)>=parseInt(smBar.style.left)
+        &&  (parseInt(smBall.style.left)+25)<=(parseInt(smBar.style.left)+150)
+        &&  (parseInt(smBall.style.top)+50)==parseInt(smBar.style.top)){
+            mvY = -mvY;
+        }
+
+        if( (parseInt(smBall.style.left)+25)>=parseInt(smBar.style.left)
+        &&  (parseInt(smBall.style.left)+25)<=(parseInt(smBar.style.left)+150)
+        &&  parseInt(smBall.style.top) == (parseInt(smBar.style.top)+30)){
+            mvY = -mvY;
+        }
+
+        timerId = setTimeout(smStart, 1);
+        //..요렇게 자기가 자기를 찾는 걸 재귀호출이라 부름!
+    }
+
+    
+</script>
+</body>
+</html>

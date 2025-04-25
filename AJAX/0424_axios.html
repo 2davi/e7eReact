@@ -1,0 +1,100 @@
+<!DOCTYPE html>
+<meta charset="utf-8">
+<script>
+/*
+  개인적 추천은 fetch나 axios 인데, axios가 좀 더 편함!
+  fetch는 then을 두 번을 써야 결과를 볼 수 있는 반면, axios는 한 번만 하면 됨
+  fetch는 보내는 데이터가 json형식이라면 JSON.stringify를 해줘야 하는데 axios는 안해도 됨
+  fetch는 받는 데이터에 따라 .text()/.json()를 해줘야하는데 axios는 안해도 됨
+     **axios 내부 처리 방식
+  axios는 axios 이름 자체도 B/E Controller에 맞춰 바꾸어 쓰기도 함
+
+  axios는 외부 라이브러리라서 설치해서 써야함! 만약, 폐쇄망이라면?
+*/
+</script>
+<script src="https://unpkg.com/axios/dist/axios.min.js"></script>
+<script>
+  const baseURL = "http://localhost:9999/api/friends";
+
+  //GET
+  fetch(baseURL).then(resp => {
+    return resp.json();
+  }).then(rslt => {
+    console.log("■□■(GET)fetch 확인: ", rslt);
+  });
+  axios.get(baseURL)
+       .then(response => {
+          console.log("■□■(GET)axios 체킁: ", response.data); //data란 property에 결과를 담아서 줌!
+  });
+
+  //POST
+  let tsFrd = { name:"태수", age:1 };
+  
+  fetch(baseURL, {
+    method:"POST", 
+    body:JSON.stringify(tsFrd),
+    headers: {"Content-Type": "application/json"}
+  }).then(resp => {
+    return resp.text();
+  }).then(rslt => {
+    console.log("■□■(POST)fetch 확인: ", rslt);
+  });
+
+  axios.post(baseURL, tsFrd)
+       .then(resp => {
+         console.log("post,axios: ",resp);
+         console.log("■□■(POST)axios 체킁: ", resp.data);
+         axios.get(baseURL)
+              .then(response => {
+                 console.log("■□■(POST)axios 체킁: ", response.data); //data란 property에 결과를 담아서 줌!
+         });
+  });
+
+  /** axios 내부 처리 방식 
+      try/catch로 미리 JSON 처리를 해주기 때문에 개발자는 하지 않아도 됨!
+  */
+  let aaa;
+  try{
+    aaa = JSON.stringify(tsFrd);
+  } catch(e) {
+    console.log("추론능력 굳", e);
+    aaa = tsFrd;
+  }
+  console.log("■□■(axios내부처리)체로롱: ", aaa);
+
+  //PUT
+  tsFrd = { name:"태수", age:999 };
+  axios.put(`${baseURL}/${tsFrd.name}`, tsFrd)
+       .then(resp => {
+          console.log("■□■(PUT)axios 체킁: ", resp.data);
+          axios.get(baseURL)
+               .then(response => {
+                  console.log("■□■(PUT)axios 체킁: ", response.data);
+          });
+  });
+
+  //DELETE
+  axios.delete(`${baseURL}/태수`)
+       .then(function() {
+        axios.get(baseURL)
+             .then(response => {
+               console.log("■□■(PUT)axios 체킁: ", response.data);
+        });
+  });
+
+  async function sunun() {
+    let resp = await axios.delete(`${baseURL}/태수`);
+    console.log("■□■(DELETE)axios 체킁킁: ", resp.data);
+    let resp2 = await axios.get(baseURL);
+    console.log("■□■(DELETE)axios 킁킁체: ", resp2.data);
+  }
+  sunun();
+
+  /* axios 예쁘게 있어 보이게 쓰는 법, */
+  // 스프링의 Controller와 맵핑 시킨 이름을 쓰면 코드 가독성이 엄청나게 좋아진다.^0^
+  const friendAPI = axios.create({
+    baseURL: "http://localhost:9999/api/friends"
+    // baseURL + "/태수"  || baseURL + ""
+  });
+  
+</script>

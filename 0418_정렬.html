@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html lang="en">
+<meta charset="utf-8">
+<!-- Array methods 중 .sort() 만들기가 가장 힘들다!! -->
+<script>
+
+//□테스트용 배열
+const ranArr = [3, 10, 3, 5, 2, 7, 22, 8];
+
+
+//■MAX값 찾기!
+// 가설!, 애매한 상황에서 시작하지 않고, 단정적인 상황에서 시작
+let maxNum = ranArr[0];     //(1)첫번째 값이 맥스당.
+for(let i=1; i<ranArr.length; i++) {    //<-이미 0번을 썼기 때문에 1번부터 돌린다.
+    if(maxNum < ranArr[i]){ //(2)가설이 틀린 상황이 오면..
+        maxNum = ranArr[i]; //(3)바꿔
+    }
+}
+alert(maxNum);
+
+
+//▒정렬은 순서를 바꿔야 함, 첫 번째 자리에 최대값 위치하게 된당!
+for(let i=1; i<ranArr.length; i++) {
+    if( ranArr[0] < ranArr[i] ) {   //(1)가설이 틀렸으닝
+        let temp = ranArr[0];       //(3)일단 보관
+        ranArr[0] = ranArr[i];      //(2)바꿔
+        ranArr[i] = temp;           //(4)멋진 말로 SWAP!!!
+    }
+}
+//▒두번째 자리에 두 번째 최대값이 오려면?
+for(let i=2; i<ranArr.length; i++) {
+    if( ranArr[1] < ranArr[i] ) {   //(1)가설이 틀렸으닝
+        let temp = ranArr[1];       //(3)일단 보관
+        ranArr[1] = ranArr[i];      //(2)바꿔
+        ranArr[i] = temp;           //(4)멋진 말로 SWAP!!!
+    }
+}
+//▒세번째...
+for(let i=3; i<ranArr.length; i++) {
+    if( ranArr[2] < ranArr[i] ) {   //(1)가설이 틀렸으닝
+        let temp = ranArr[2];       //(3)일단 보관
+        ranArr[2] = ranArr[i];      //(2)바꿔
+        ranArr[i] = temp;           //(4)멋진 말로 SWAP!!!
+    }
+}
+//■:=>> ^Q^이중 for문!
+for(let j=0; j<ranArr.length; j++) {        //각자리에 각자리번째 큰 수가 오도록 정렬 ==> INDEX j;
+    for(let i=j+1; i<ranArr.length; i++) {  // j를 위한 반복작업 ==> INDEX i;
+        if( ranArr[j] > ranArr[i] ) {       //<--부등호 방향으로 오름차순/내림차순
+            let temp = ranArr[j];
+            ranArr[j] = ranArr[i];
+            ranArr[i] = temp;
+        }
+    }
+}
+//반복되는 걸 정리하면 아래와 같아짐! 가장 간단한 버블정렬 알고리즘이 탄생하게 됨!
+console.log("체킁: ", ranArr);
+
+/**└──→ 배열직접만들깅2.html */
+</script>
+</html>

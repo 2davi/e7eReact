@@ -3,7 +3,7 @@
 정리는 양이 너무 늘어나지 않게
  양이 늘어나면 검색하는게(A.I.) 빠름!
 
-## 0410
+## 0410 _변수 선언, Wrapper, delete
 
 const 주의 객체 선언 시 내용물은 바꿀 수 있당
 +만 문자열/산술 연산, 나머지는 산술 연산
@@ -14,20 +14,20 @@ let, const 사용을 권장, 삶의 생명주기를 {}block이 관장한다. (va
 객체 선언시 속성 배열식 접근법(연봉흔들려)
 JavaScript는 동적 언어라서 대부분 형변환이 자동으로 일어난다.
 
-## 0411
+## 0411 _callback
 
 callback 별거 아니당. 비동기랑 관련이 없다. 비동기 결과 처리에 많
 선언/호출을 헷갈려한다. 눈이 따라가기만 하면 진짜 암것도 아니당
 눈이 따라가려면 자주 봐야 한당.
 
-## 0414
+## 0414 _proxy
 
 선언과 표현식(expression) 즉각실행함수 (), !
 비동기(ajax) => 이젠 cpu가 1개가 아니당!
 proxy(쁘락치) => 제어포인트가 생긴당. 느껴야!
 개발자에게 중요한 css => 레이아웃, position, display, transform
 
-## 0415
+## 0415 _Origin, CrossOriginResourceSharing
 
 Origin 3요소 => http:// 프로토콜, sumin.com DN(hostname, 서버명), :80 포트번호
 CORS: Cross Origin Resource Sharing => AJAX의 제약사항 =>
@@ -41,7 +41,7 @@ CORS: Cross Origin Resource Sharing => AJAX의 제약사항 =>
 자기암시! 를 반복하면 믿게 되고, 믿으면 그에 맞게 행동하게 된다.
 (이건 저 믿고 꼬옥 2달 정도 해봅니다.)
 
-## 0416
+## 0416 _템플릿패턴, this함수
 
 `TAG.dataset.DATANAME;` data- attributes는 dataset property에 저장
 `TAG.cloneNode(true);`  깊은복사
@@ -55,7 +55,7 @@ this에 대한 고찰 :=> call vs apply vs bind
  FUNCTION.bind(DIRECT, PARAMETER [,...]);
 call과 bind의 문법은 동일. 다만 call은 함수 즉시 호출 기능이 (+)
 
-## 0417
+## 0417 _함수클래스, event
 
 function을 Class처럼  :=> 클래스; `사용자 정의 데이터 타입`
         field:  `상태를보존` :=>객체마다 달라야 함
@@ -72,7 +72,7 @@ event.. :=>event.target vs event.currentTarget
 `https://c3js.org/`
 `https://www.chartjs.org/`
 
-## 0418
+## 0418 _공유/참조, 배열, this
 
 `공유` == `참조`;
 METHOD CHAINING :=> prototype function에 `return this;`를 붙이면 메소드 체이닝 가능.
@@ -88,7 +88,7 @@ Array..
 
 this => call/ apply/ bind(있어 보인당 -> 많이^0^)
 
-## 0421
+## 0421 _LocalStorage, 선언적 프로그래밍(<->명령형)
 
 LocalStorage만 잘 써도 Cookie가 사실상 필요 없어진다.
 
@@ -146,7 +146,7 @@ else
 
 ```
 
-## 0422
+## 0422 _구조분해, 모듈, SpreadOperator
 
 구조분해
          => 리액트에서 쓰니깡^0^
@@ -162,7 +162,7 @@ else
          => **새로운 객체가 새로 생성되어 할당**
          => (기존 참조랑 헷갈리지 말길)
 
-## 0423
+## 0423 _await/async, JQuery
 
 구조분해는 함수의 매개변수에도 적용 가능하다.
 
@@ -182,7 +182,7 @@ JQuery
          => callback을 매개변수로 받는 메소드를 만들 수 있으면 OK!(시간을 두고 차분히 연습)
          => 읽기/ 전부쓰기/ 부분조작(callback)
 
-## 0424
+## 0424 _Axios, AG-Grid
 
 - Context: 한 소프트웨어의 지배 권한이나 전체 정보를 지니고 있는 객체.
            대전이 프로그램이라면 컨텍스트는 대전시청.
@@ -206,3 +206,9 @@ JQuery
           넘무 눈의 힘으로 오타 찾는 거 힘들어, 범위를 좁혀줘야...ㅠ
           (오타가 의심되면 아예 그 부분을 다시 작성하는 것도 테크닉)
         - 나이가 어리면 좀 더 시간을 줌!
+
+## 0425
+
+- 라이브러리: react(점유), 프레임워크: vue(소규모), angular(대규모)
+  *프레임워크: 규격이 정해진 틀
+- 프론트 프레임워크를 쓸 때 Node.js가 거의 기본급에 가깝다.

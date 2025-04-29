@@ -384,3 +384,37 @@ Maven의 역할 `빌드관리툴`
 # 0425
 
 # 0428
+
+0과 1의 데이터를 전송할 떈 Packet 통신이 중요하다.
+Request는 총 세개의 Part로 우편물을 표현한다.
+
+- Request Line
+    Line 내의 메소드에 따라 사용자의 목적이 달라지고, 그것이 Request Body에 연관.
+    어떤 자원인지 식별할 수 있으며(URI), 어떤 Action을 할 것인지도(METHOD).
+- Request Header
+    Body의 데이터에 대한 정보가 담긴 메타데이터가 위치(NAME: VALUE)
+    클라이언트가 받으려는 데이터 형식(응답 데이터의 조건 설정)
+    : accept[MIME], accept-language[LocaleCode(LanguageCode)]
+    : content-*
+- Request Body
+    서버로 보내려는 진짜 데이터가 위치
+
+# 0429
+
+# 0429 _보강
+
+- WebScrapping
+  `https://developer.mozilla.org/ko/docs/Web/HTTP/Reference/Headers/Accept`
+  비동기요청을 보내서 HTTP 헤더의 하위 목록들(Accept *)만 꺼내오고 싶다 ==스크랩핑
+  현재 document의 출처와 비동기요청의 출처가 동일하다 == SameOriginPolicy동일출처의 원칙
+  Proxy: 대리자, 가짜서버
+
+- CORS
+- Proxy Server
+
+- 북마킹 사이트
+`https://apache.org/` 개발하는 내내 참고할 사이트
+`https://mybatis.org/mybatis-3/ko/index.html`
+`https://hibernate.org/` 시간만 되면 여기서 두 개의 프레임워크 써보려구
+`https://spring.io/`
+`https://developer.mozilla.org/ko/` 웹 개발을 하려면 반드시 알아야 하는 사이트

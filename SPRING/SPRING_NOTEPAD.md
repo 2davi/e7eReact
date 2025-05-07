@@ -418,3 +418,42 @@ Request는 총 세개의 Part로 우편물을 표현한다.
 `https://hibernate.org/` 시간만 되면 여기서 두 개의 프레임워크 써보려구
 `https://spring.io/`
 `https://developer.mozilla.org/ko/` 웹 개발을 하려면 반드시 알아야 하는 사이트
+
+# 0430
+
+## Request
+
+- 어떤 요청이느냐에 따라 중요한 헤더가 달라진다.
+  GET요청: `accept`
+  POST요청: `content-type`
+- PUT요청은 Parameter를 보내지 않고, JSON Payload로만 주고받는다.
+- DELETE요청은 BODY가 필요없다.
+
+# 0501
+
+## Response:: 답장을 쓰는 방법
+
+- 가장 먼저 궁금한 것: 내 명령의 처리결과 성공/실패
+  숫자로 되어있는 상태코드(Status Code)
+    100:
+    200:
+    300:
+    400: 실패한 사유도 함께
+    500:
+- Response에서 꼭 알아야 하는 Headers
+
+## 우리가 새로운 Enum을 정의해서 쓸 거야
+
+## Stream API
+
+# 0502
+
+## Calendar 과제 이어서
+
+### EL과 JSTL 활용
+
+### Time API
+
+# 0507
+
+## .

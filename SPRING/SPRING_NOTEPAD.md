@@ -456,4 +456,14 @@ Request는 총 세개의 Part로 우편물을 표현한다.
 
 # 0507
 
-## .
+## 0513
+
+Client
+        Part.1
+WAS
+        Part.2 ->MyBatis, JPA, H~, ...
+DB
+
+Spring=>Part.3
+
+- 어플리케이션이 데이터베이스에 종속 (RDB 종류에 따라 영향을 받음.)
